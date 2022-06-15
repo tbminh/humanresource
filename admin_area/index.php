@@ -23,20 +23,6 @@
         $admin_contact = $row_admin['admin_contact'];
         $admin_birthday = $row_admin['admin_birthday'];
 
-        // $get_employ = "select * from employee";
-        // $run_employ = mysqli_query($conn,$get_employ);
-        // $count_employ = mysqli_num_rows($run_employ);
-        
-        
-        // $get_pb = "select * from department";
-        // $run_pb = mysqli_query($conn,$get_pb);
-        // $count_pb = mysqli_num_rows($run_pb);
-        // $get_cv = "select * from position";
-        // $run_cv = mysqli_query($conn,$get_cv);
-        // $count_cv = mysqli_num_rows($run_cv);
-        // $get_cm = "select * from department";
-        // $run_cm = mysqli_query($conn,$get_cm);
-        // $count_cm = mysqli_num_rows($run_cm);
 
 ?>
 

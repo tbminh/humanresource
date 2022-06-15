@@ -77,10 +77,7 @@
                   <th>Tháng giao</th>
                   <th>Tỉ trọng</th>
                   <th>Đơn vị tính</th>
-                  
-               
-                  
-                <th>Đánh giá </th>
+                  <th>Đánh giá </th>
                   <th scope="col" colspan="2">Tùy chọn</th>
                  
                 </thead>
@@ -89,10 +86,12 @@
 
                 <?php
                     $i=0;
+                    //Thực hiện truy vấn SQL show ra toàn bộ kpi
                     $query = "SELECT * from kpi ";
                     $result = mysqli_query($conn,$query); 
                     while($row = mysqli_fetch_array($result))
                     {
+                      //Gán các giá trị lấy được tự lệnh SQL vào các biến
                       $id = $row['id'];
                       $id_kpi = $row['id_kpi'];
                       $emp_id = $row['employ_id'];
@@ -108,6 +107,7 @@
                       $date = strtotime($time);
                   ?>
                       <tr>
+                        <!-- Show các biến ra ngoài -->
                         <td> <?php echo $i; ?> </td>
                       <td> <?php echo $id_kpi; ?> </td>
                       <td> <?php echo $emp_id; ?> </td>
@@ -176,6 +176,7 @@
                             <select name="employ_id" class="form-control">
                               <option>----- Chọn nhân viên  -----</option>
                               <?php
+                              //Truy vấn SQL hiển thị ra danh sách nhân viên
                                 $get_emp = "SELECT * FROM employee";
                                 $run_emp = mysqli_query($conn,$get_emp);
                                 while($row_emp = mysqli_fetch_array($run_emp)){
@@ -238,7 +239,9 @@
 <?php } ?>
 
 <?php
+      //Nhận sự kiện 'add' từ nút thêm của modal
     if(isset($_POST['add'])){
+       // Gán giá trị đã nhập vào các biến
         $emp_id = $_POST['employ_id'];
         $emp_name = $_POST['employ_id'];
         $id_kpi = $_POST['id_kpi'];
@@ -248,12 +251,10 @@
         $target= 0;
         $time= $_POST['time'];
 
-       
-
-
-        //Thực hiện truy vấn dữ liệu
+        //Thực hiện thêm dữ liệu từ các biến 
         $insert_p = "insert into kpi (id_kpi,kpi_name,employ_id,full_name,unit,percent,target,time ) VALUES ('$id_kpi','$kpi_name','$emp_id','$emp_name','$unit','$percent','$target','$time')";
         $run_p = mysqli_query($conn,$insert_p);
+        //Báo lỗi khi nhập trùng mã nhân viên và email
         if($run_p){
             echo "<script>alert('Bạn đã thêm kpi thành công')</script>";
             echo "<script>window.open('index.php?view_kpi','_self')</script>";

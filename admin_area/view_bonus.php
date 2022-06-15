@@ -39,15 +39,16 @@
                         </thead>
                         <tbody>
                             <?php
+                            //Truy vấn SQL lấy ra thông tin danh sách khen thưởng
                                 $i=0;
                                 $get_cats = "select * from bonus";
                                 $run_cats = mysqli_query($con,$get_cats);
+                                //Sau khi có danh sách khen thưởng ta gán chúng vào các biến
                                 while($row_cats=mysqli_fetch_array($run_cats)){
                                     $cat_id = $row_cats['id_bonus'];
                                     $cat_title = $row_cats['bonus_name'];
                                     $cat_bac = $row_cats['bonus_method'];
                                     $i++;
-                                
                             ?>
                             <tr>
                                 <td> <?php echo $i; ?> </td>

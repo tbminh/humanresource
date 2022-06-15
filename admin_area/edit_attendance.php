@@ -64,6 +64,27 @@
                                 <input value="<?php echo $out; ?>" name="time_out" type="time" class="form-control">
                             </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Trạng Thái</label>
+                            <div class="col-md-6">
+                                <select name="status" class="form-control"  required ><!--40-->
+                                    <option>---Chọn trạng thái---</option>
+                                    <?php
+                                    $st1 = "Đúng giờ";
+                                    $st0= "Đi trễ";
+                                    $st2= "Vắng";
+                                    
+                                    echo"
+                                    <option> $st1  </option>
+                                    <option> $st0  </option>
+                                    <option> $st2 </option>
+                                    ";
+                                    ?>  
+                                </select>
+                            </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="" class="control-label col-md-3"></label>
                         <div class="col-md-6">
@@ -80,13 +101,21 @@
         $date = $_POST['date'];
         $time_in = $_POST['time_in'];
         $time_out = $_POST['time_out'];
-        $update = "update attendance set work_day ='$date', start_time='$time_in', finish_time = 'time_out' where id='$a_id'";
+        $get = $_POST['status'];
+        if($get== "Đúng giờ"){
+          $status =1;
+        }else if($get== "Đi trễ"){
+          $status =0;
+        }
+        else{
+          $status = 2;
+        }
+        $update = "update attendance set work_day ='$date', start_time='$time_in', finish_time = 'time_out', status ='$status' where id='$a_id'";
         $run_p_cat = mysqli_query($conn,$update);
         if($run_p_cat){
             echo "<script>alert('Danh mục điểm danh của bạn đã được cập nhật thành công')</script>";
             echo "<script>window.open('index.php?view_attendance','_self')</script>";
         }
-        
     }
 ?>
 

@@ -41,9 +41,11 @@
                         <tbody>
                             <?php
                                 $i=0;
+                                //Dùng lệnh SQL hiển thị thông tin trình độ
                                 $get_coupons = "select * from levels";
                                 $run_coupons = mysqli_query($conn,$get_coupons);
                                 while($row_coupons=mysqli_fetch_array($run_coupons)){
+                                    //Gán các giá trị nhận được từ lệnh SQl vào biến
                                     $id = $row_coupons['id'];
                                     $level_id = $row_coupons['level_id'];
                                     $level_name = $row_coupons['level_name'];
@@ -54,13 +56,14 @@
                                
                             ?>
                             <tr>
+                                <!-- Show các biến ra -->
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $level_id; ?></td>
                                     <td><?php echo  $level_name; ?></td>
                                     <td><?php echo $level_note; ?></td>
                                    
                                     <td>
-                                        <a style="text" href="index.php?edit_level<?php echo $level_id; ?>" data-toggle="modal" class='btn btn-success btn-sm btn-flat edit'><i class='fa fa-edit'></i> Edit</a>     
+                                        <a style="text" href="index.php?edit_level=<?php echo $level_id; ?>" data-toggle="modal" class='btn btn-success btn-sm btn-flat edit'><i class='fa fa-edit'></i> Edit</a>     
                                     </td>
                                     <td> 
                                         <a class='btn btn-danger btn-sm btn-flat delete' href="index.php?delete_level=<?php echo $level_id ?>">
@@ -76,6 +79,7 @@
         </div>
     </div>
 </div>
+<!-- MOdal thêm mới trình độ -->
 <div class="modal fade" id="addnew">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -106,8 +110,7 @@
                             <input type="text" class="form-control"  name="level_note">
                         </div>
                     </div>
-
-                
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Đóng</button>
                         <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Lưu</button>
@@ -121,13 +124,16 @@
     }
 ?>
 <?php
+//Nhận sự kiện nút name = 'add' 
     if(isset($_POST['add'])){
+        //Gán các giá trị đã nhập trong modal vào các biến
+        $l_id = $_POST['level_id'];
         $l_name = $_POST['level_name'];
         $l_note = $_POST['level_note'];
 
         
         //Thực hiện truy vấn dữ liệu
-        $insert_level = "insert into levels(level_name,level_note) VALUES ( '$l_name','$l_note')";
+        $insert_level = "insert into levels(level_id,level_name,level_note) VALUES ('$l_id','$l_name','$l_note')";
         $run_level = mysqli_query($conn,$insert_level);
         if($run_level){
             echo "<script>alert('Bạn đã thêm trình độ thành công')</script>";

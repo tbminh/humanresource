@@ -39,10 +39,12 @@
 
                         <?php
                             $i=0;
+                            //Truy vấn SQL lấy ra thông tin khen thưởng kỉ luật
                             $query = "SELECT * from ktkl";
                             $result = mysqli_query($conn,$query); 
                             while($row = mysqli_fetch_array($result))
                             {
+                                //Gán các giá trị lấy được từ lệnh SQl vào biến
                                 $id = $row['id'];
                                 $id_db = $row['id_db'];
                                 $db_name = $row['db_name'];
@@ -52,6 +54,7 @@
                         ?>
                             
                             <tr>
+                                <!-- Show các biến ra ngoài -->
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo $id_db; ?></td>
                                 <td><?php echo $db_name; ?></td>
@@ -125,7 +128,9 @@
 </div>
 <?php } ?>
 <?php
+//Nhận sự kiện 'add' từ nút thêm của modal
     if(isset($_POST['add'])){
+        // Gán giá trị đã nhập vào các biến
         $id = $_POST['id'];
         $name = $_POST['name'];
         $note = $_POST['note'];

@@ -37,9 +37,11 @@
                         <tbody>
                             <?php
                                 $i=0;
+                                //Truy vấn SQL lấy ra danh sách phòng ban
                                 $get_p = "select * from department";
                                 $run_p = mysqli_query($conn,$get_p);
                                 while($row_p=mysqli_fetch_array($run_p)){
+                                    //Sau khi lấy ra danh sách ta lần lượt gán chúng ta các biến
                                     $id = $row_p['id'];
                                     $d_id = $row_p['department_id'];
                                     $d_title = $row_p['depart_name'];
@@ -48,6 +50,7 @@
                                 
                             ?>
                             <tr>
+                                <!-- Show các biến đó ra ngoài -->
                                 <td> <?php echo $i; ?> </td>
                                 <td> <?php echo $d_id; ?> </td>
                                 <td> <?php echo $d_title; ?> </td>
@@ -78,7 +81,7 @@
             	<h4 class="modal-title"><b>Thêm phòng ban</b></h4>
           	</div>
           	<div class="modal-body">
-            	<form action="" method="POST" class="form-horizontal" >
+            	<form action="" method="POST" class="form-horizontal">
 
                     <div class="form-group">
                         <label for="depart-id" class="col-sm-3 control-label" require>Mã Phòng Ban</label>
@@ -113,14 +116,14 @@
 <?php } 
     ?>
 <?php
+//Nhận sự kiện 'add' từ nút thêm của modal
     if(isset($_POST['add'])){
+        // Gán giá trị đã nhập vào các biến
         $id = $_POST['depart_id'];
         $d_name = $_POST['depart_name'];
         $d_note = $_POST['depart_note'];
-
-        
-        //Thực hiện thêm dữ liệu
-        $insert_depart = "INSERT INTO department(depart_id,depart_name,depart_note) VALUES ('$id','$d_name','$d_note')";
+        //Thực hiện thêm dữ liệu từ các biến
+        $insert_depart = "insert into department(department_id,depart_name,depart_note) VALUES ('$id','$d_name','$d_note')";
         $run_depart = mysqli_query($conn,$insert_depart);
         if($run_depart){
             echo "<script>alert('Bạn đã thêm phòng ban thành công')</script>";

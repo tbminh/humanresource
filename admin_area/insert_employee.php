@@ -154,7 +154,9 @@
 </html>
 
 <?php
+//Nhận lệnh submit từ button ở file view_employee kèm theo các thông tin như họ tên, phòng ban, chức vụ,....
     if(isset($_POST['submit'])){
+        //Gán các thông tin nhận được vào các biến
         $c_name = $_POST['c_name'];
         $c_email = $_POST['c_email'];
         $c_pass = $_POST['c_pass'];
@@ -181,7 +183,7 @@
             exit();
 
         } }
-
+        //Sau đó insert vào bảng 
         $insert_customer = "insert into customers (customer_name,customer_email,customer_pass,customer_phongban,customer_chucvu,customer_contact,customer_address,customer_image,customer_chuyenmon) values ( '$c_name','$c_email','$c_pass','$c_phongban','$c_chucvu','$c_lienhe','$c_diachi','$c_image','$c_chuyenmon')";
         $run_customer = mysqli_query($con,$insert_customer);
         if($run_customer){

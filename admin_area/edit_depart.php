@@ -16,7 +16,7 @@
         $row_edit = mysqli_fetch_array($run_edit);
         
         $p_cat_id = $row_edit['id'];
-        $p_cat_id = $row_edit['depart_id'];
+        $p_cat_id = $row_edit['department_id'];
         $p_cat_title = $row_edit['depart_name'];
         $p_cat_desc = $row_edit['depart_note'];
     }

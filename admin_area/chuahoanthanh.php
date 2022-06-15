@@ -9,7 +9,7 @@
 ?>
 
 <?php
-
+    //Lấy id của kpi chưa hoàn thành để chuyển sang trạng thái đã hoàn thành
     if (isset($_GET['chuahoanthanh'])) {
         $confirm_product_id = $_GET['chuahoanthanh'];
         $order_status = '1';
@@ -17,11 +17,8 @@
         $row_update_customer_order = mysqli_query($conn, $update_customer_order);
 
         if ($row_update_customer_order) {
-            echo "<script>alert(' Đã được cập nhật thành công')</script>";
             echo "<script>window.open('index.php?view_kpi','_self')</script>";
         }
-    
-        
     }
 ?>
 

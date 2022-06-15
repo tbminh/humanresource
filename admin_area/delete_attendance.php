@@ -9,6 +9,7 @@
 
 ?>
 <?php
+//Lấy ra id của attendance cần xóa sau đó delete
     if(isset($_GET['delete_attendance'])){
         $delete_id = $_GET['delete_attendance'];
         $delete_d = "delete from attendance where id='$delete_id'";

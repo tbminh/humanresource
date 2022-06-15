@@ -37,6 +37,7 @@
                 </thead>
                 <tbody>
                 <?php
+                //Hiển thị thông tin lương theo thông tin nhân viên, mức lương, tỷ trọng, khen thưởng kỉ luật
                                 $get_c = "SELECT lv.level_name,emp.*,sc.time_in,sc.time_out,ps.position_name, ps.basic_salary
                                 FROM employee as emp, levels as lv, schedule as sc, position as ps
                                 WHERE lv.id = emp.id_level 
@@ -53,8 +54,6 @@
                                     $luong = $row_c['basic_salary'];
                                     //Đổi kiểu time lịch làm việc
                                     $i++;
-                                    
-                                       
                                 
                             ?>
                      <tr>
@@ -74,40 +73,44 @@
                                           $percent = $row_sold['percent'];
                                           $b = 0;
                                           $bc = $percent + $b;
-                                          $ab += $bc;
+                                          $ab += $bc; //Tổng % KPI hoàn thành
                                           $v = 10;
-                                          $tl = $ab - $v;
-                                          $tlt = $ab + $v;
+                                          $tl = $ab - $v; //Lương phạt
+                                          $tlt = $ab + $v; //Lương thưởng
                                          
                                         }echo  $ab . ' %';
                                         ?>
 
                                   </td>
-                                  <td> <?php echo number_format($luong) . ' VNĐ'; ?> </td>
-                                  <td>
+                                  <td> 
+                                    <!-- Lương chức vụ -->
+                                    <?php echo number_format($luong) . ' VNĐ'; ?> 
+                                  </td>
+                                  <td> 
+                                     <!-- Khen thưởng kỉ luật -->
                                         <?php
                                           $aa = 'Chuyên cần tốt (+10%)';
                                           $bb = 'Chuyên cần không tốt(-10%)';
                                           $ba = 'Bình thương (+-0%)';
                                           $cc = 0;
-                                          $sta = 0;
-                                          $sta1 = 2;
+                                          $sta = 0; //Vắng
+                                          $sta1 = 2; //Đi trễ
                                             $get_s = "select * from attendance where employ_id='$id' AND (status ='$cc' or status = '$sta1')";
                                             $run_s = mysqli_query($conn,$get_s);
                                             $count = mysqli_num_rows($run_s);
                                               
-                                             if($count >= '3' ){
+                                            if($count >= '3' ){ //Nếu vắng trễ trên 3 lần thì chuyên cần không tốt
                                               echo $bb;
-                                            }else if($count == '0'){
+                                            }else if($count == '0'){ //Nếu không vắng trễ ngày nào thì chuyên cần tốt
                                               echo $aa;
                                             }else{
-                                              echo $ba;
+                                              echo $ba; //Vắng trễ dưới 3 lần thì bình thường
                                             }
-                                            
                                         ?>
 
                                   </td>
-                                  <td>
+                                  <td> /
+                                    <!-- Tổng kết -->
                                             <?php
                                                   $cc = 0;
                                                   $sta = 0;
@@ -116,7 +119,6 @@
                                                     $get_s = "select * from attendance where employ_id='$id' AND (status ='$cc' or status = '$sta1')";
                                                     $run_s = mysqli_query($conn,$get_s);
                                                     $count = mysqli_num_rows($run_s);
-                                                      
                                                    
                                                     if($count >= '3' ){
                                                       echo $tl . ' %';
@@ -131,6 +133,7 @@
 
                                   </td>
                                   <td>
+                                    <!-- Tổng Lương -->
                                         <?php
                                         $cc = 0;
                                         $sta = 0;

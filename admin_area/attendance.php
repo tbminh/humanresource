@@ -83,12 +83,15 @@
 
                 <?php
                   $i=0;
-                    $query = "SELECT emp.*, att.*
+                  //Truy vấn lấy thông tin chấm công theo từng nhân viên
+                    $query = "SELECT emp.*, att.* 
                               FROM employee as emp, attendance as att
-                              WHERE emp.id = att.employ_id";
+                              WHERE emp.id = att.employ_id
+                              ORDER BY att.id DESC";
                     $result = mysqli_query($conn,$query); 
                     while($row = mysqli_fetch_assoc($result))
                     {
+                      //Gán thông tin lấy được vào các biến
                       $a_id = $row['id'];
                       $emp_id = $row['employee_id'];
                       $name = $row['full_name'];
@@ -107,6 +110,7 @@
                       $i++;
                   ?>
                       <tr>
+                        <!-- In ra thông tin -->
                       <td> <?php echo $i; ?> </td>
                       <td> <?php echo $emp_id ?> </td>
                       <td> <?php echo $name ?> </td>
@@ -118,11 +122,10 @@
                           <a href="index.php?edit_attendance=<?php echo $a_id; ?>" data-toggle="modal" class='btn btn-success btn-sm btn-flat edit'><i class='fa fa-edit'></i> Edit</a>     
                       </td>
                       <td>
-                          <a href="index.php?delete_attendance=<?php echo $a_id; ?>" data-toggle="modal" class='btn btn-danger btn-sm btn-flat delete'><i class='fa fa-trash'></i> Delete</a>
+                          <a href="index.php?delete_attendance=<?php echo $a_id; ?>" onclick="confirm('Xác nhận xóa?')" data-toggle="modal" class='btn btn-danger btn-sm btn-flat delete'><i class='fa fa-trash'></i> Delete</a>
                       </td>
                   </tr>
-                <?php }?>    
-                  
+                <?php }?>  
                 </tbody>
               </table>
             </div>

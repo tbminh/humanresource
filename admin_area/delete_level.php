@@ -11,7 +11,7 @@
 <?php
     if(isset($_GET['delete_level'])){
         $delete_cat_id = $_GET['delete_level'];
-        $delete_cat = "delete from levels where id='$delete_cat_id'";
+        $delete_cat = "delete from levels where level_id='$delete_cat_id'";
         $run_delete = mysqli_query($conn,$delete_cat);
         if($run_delete){
             echo "<script>alert('Một trong những danh mục trình độ của bạn đã bị xóa')</script>";

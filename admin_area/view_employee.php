@@ -74,6 +74,7 @@
                         </thread>
                         <tbody>
                             <?php
+                            //Truy vấn SQL lấy ra thông tin cá nhân, chức vụ, lịch làm việc.
                                 $get_c = "SELECT lv.level_name,emp.*,sc.time_in,sc.time_out,ps.position_name
                                             FROM employee as emp, levels as lv, schedule as sc, position as ps
                                             WHERE lv.id = emp.id_level 
@@ -82,6 +83,7 @@
     
                                 $run_c = mysqli_query($conn,$get_c);
                                 $i=0;
+                                //Gán những thông tin lấy được vào các biến
                                 while($row_c=mysqli_fetch_array($run_c)){
                                     $id = $row_c['id'];
                                     $c_id = $row_c['employee_id'];
@@ -99,6 +101,7 @@
                                     
                             ?>
                             <tr>
+                                <!-- Show các biến ra ngoài -->
                                     <td> <?php echo $i; ?> </td>
                                     <td> <?php echo $c_id; ?> </td>
                                     <td> <?php echo $name; ?> </td>
@@ -260,7 +263,9 @@
     }
 ?>
 <?php
+//Nhận sự kiện 'add' từ nút thêm của modal
     if(isset($_POST['add'])){
+         // Gán giá trị đã nhập vào các biến
         $id = $_POST['employ'];
         $name = $_POST['name'];
         $level = $_POST['level'];
@@ -273,15 +278,14 @@
         $birthday = $_POST['birthday'];
         $pass = 1234567;
 
-        //Báo lỗi khi nhập trùng mã nhân viên và email
         $get_soluong = "select * from employee";
         $run_soluong = mysqli_query($conn, $get_soluong);
         while($row_soluong = mysqli_fetch_array($run_soluong)){
         $soluong = $row_soluong['email'];
         $idd = $row_soluong['employee_id'];
 
+        //Báo lỗi khi nhập trùng mã nhân viên và email
         if ($idd ==  $id) {
-
             echo "<script>alert('Mã nhân viên đã tồn tại')</script>";
 
             exit();
@@ -298,7 +302,7 @@
 
         } }
         
-        //Thực hiện truy vấn dữ liệu
+        //Thực hiện thêm dữ liệu từ các biến 
         $insert_emp = "insert into employee( employee_id, full_name, id_level, id_position, id_schedule, email,pass,address,phone,sex,birthday) 
                         VALUES ( '$id','$name','$level','$pos', '$sc', '$email','$pass','$address','$phone','$sex','$birthday')";
         $run_emp = mysqli_query($conn,$insert_emp);

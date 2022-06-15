@@ -11,10 +11,10 @@
 <?php
     if(isset($_GET['edit_level'])){
         $edit_cat = $_GET['edit_level'];
-        $edit_cat_que = "select * from levels where id='$edit_cat'";
+        $edit_cat_que = "SELECT * from levels where level_id ='$edit_cat'";
         $run_edit = mysqli_query($conn,$edit_cat_que);
         $row_edit = mysqli_fetch_array($run_edit);
-        $level_id = $row_edit['id_level'];
+        $level_id = $row_edit['level_id'];
         $level_title = $row_edit['level_name'];
         $level_desc = $row_edit['level_note'];
     }
@@ -72,7 +72,7 @@
     if(isset($_POST['update'])){
         $cat_title = $_POST['cat_title'];
         $cat_desc = $_POST['cat_desc'];
-        $update_cat = "update level set level_name='$cat_title',level_note='$cat_desc' where id_level='$level_id'";
+        $update_cat = "UPDATE levels set level_name='$cat_title', level_note='$cat_desc' where level_id='$edit_cat'";
         $run_cat = mysqli_query($con,$update_cat);
         if($run_cat){
             echo "<script>alert('Danh mục trình độ của bạn đã được cập nhật thành công')</script>";

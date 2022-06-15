@@ -38,25 +38,27 @@
                         <tbody>
                             <?php
                                 $i=0;
+                                //Hiển thị thông tin phòng ban và chức vụ
                                 $get_p = "SELECT dp.*, ps.*
                                         FROM department as dp, position as ps
                                         WHERE dp.id = ps.depart_id";
                                 $run_p = mysqli_query($conn,$get_p);
                                 while($row=mysqli_fetch_assoc($run_p)){
+                                    //Gán các giá trị nhận được từ lệnh SQL vào biến
                                     $id = $row['id'];
                                     $d_id = $row['department_id'];
                                     $p_id = $row['position_id'];
                                     $p_name = $row['position_name'];
                                     $p_coef = $row['basic_salary'];
                                     $i++;
-                                
                             ?>
                             <tr>
+                                <!-- Hiển thị các biến -->
                                 <td> <?php echo $i; ?> </td>
                                 <td> <?php echo $d_id; ?> </td>
                                 <td> <?php echo $p_id; ?> </td>
                                 <td> <?php echo $p_name; ?> </td>
-                                <td> <?php echo number_format($p_coef). ' VND'; ?> </td>
+                                <td> <?php echo number_format($p_coef). ' VND'; ?></td>
                                 <td>
                                     <a style="text" href="index.php?edit_position=<?php echo $id; ?>" data-toggle="modal" class='btn btn-success btn-sm btn-flat edit'><i class='fa fa-edit'></i> Edit</a>     
                                 </td>
@@ -104,6 +106,7 @@
                         <select name="dep" class="form-control" required>
                           <option>--------- Phòng ban Nhân Viên  ---------</option>
                           <?php
+                          //Truy vấn SQL hiển thị ra thông tin phòng ban
                             $get_l = "SELECT * FROM department";
                             $run_l = mysqli_query($conn,$get_l);
                             while($row_l = mysqli_fetch_array($run_l)){
@@ -137,14 +140,16 @@
 <?php } ?>
 
 <?php
+//Nhận sự kiện 'add' từ nút thêm của modal
     if(isset($_POST['add'])){
+        // Gán giá trị đã nhập vào các biến
         $id = $_POST['id_position'];
         $depart = $_POST['dep'];
         $name = $_POST['p_name'];
         $coef= $_POST['p_coef'];
 
         //Thực hiện truy vấn dữ liệu
-        $insert_p = "insert into position ( position_id,depart_id,position_name,basic_salary ) VALUES ('$id','$depart','$name','$coef')";
+        $insert_p = "INSERT into position (position_id,depart_id,position_name,basic_salary) VALUES ('$id','$depart','$name','$coef')";
         $run_p = mysqli_query($conn,$insert_p);
         if($run_p){
             echo "<script>alert('Bạn đã thêm chức vụ thành công')</script>";

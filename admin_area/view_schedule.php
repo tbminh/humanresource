@@ -41,6 +41,7 @@
                         <tbody>
                             <?php
                                 $i=0;
+                                //Truy vấn SQL hiển thị lịch làm việc
                                 $get_s = "select * from schedule";
                                 $run_s = mysqli_query($conn,$get_s);
                                 while($row=mysqli_fetch_array($run_s)){
@@ -51,6 +52,7 @@
                                     $i++;
                             ?>
                             <tr>
+                                <!-- Show các biến thông tin lịch làm việc ra ngoài -->
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $s_id; ?></td>
                                     <td><?php echo $in. " AM";?></td>
