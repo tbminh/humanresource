@@ -78,9 +78,8 @@
                   <th>Giờ tan ca</th>
                   <th scope="col" colspan="2">Tùy chọn</th>
                 </thead>
-                <tbody>
-                
 
+                <tbody>
                 <?php
                   $i=0;
                   //Truy vấn lấy thông tin chấm công theo từng nhân viên
@@ -181,7 +180,8 @@
 
                       <div class="col-sm-9">
                         <div class="bootstrap-timepicker">
-                          <input type="time" class="form-control timepicker" id="time_in" name="time_in">
+                          <input type="time" class="form-control timepicker" id="time_in"
+                                 name="time_in">
                         </div>
                       </div>
                   </div>
@@ -189,7 +189,8 @@
                       <label for="time_out" class="col-sm-3 control-label">Giờ tan ca</label>
                       <div class="col-sm-9">
                         <div class="bootstrap-timepicker">
-                          <input type="time" class="form-control timepicker" id="time_out" name="time_out">
+                          <input type="time" class="form-control timepicker" id="time_out"
+                                 name="time_out" value="<?php echo date('Y-m-d\TH:i:s'); ?>">
                         </div>
                       </div>
                   </div>

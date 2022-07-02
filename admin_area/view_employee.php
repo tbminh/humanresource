@@ -4,7 +4,6 @@
         echo "<script>window.open('login.php','_self')</script>";
         
     }else{
-
 ?>
 <section class="content-header">
       <h1 style="color: blue;">
@@ -45,85 +44,86 @@
 <div class="topnav">
     <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Thêm mới</a>
     <div class="search-container">
-    <form method="get" action="index.php?search">
-    <div class="search-container">
-      <input type="text" placeholder="Search.." name="user_query" required>
-      <button href="#search" type="submit" name="search"><i class="fa fa-search"></i></button>
-    </form>
+        <form method="get" action="index.php?search">
+            <div class="search-container">
+              <input type="text" placeholder="Search.." name="user_query" required>
+              <button href="#search" type="submit" name="search"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
     </div>
-</div> </div><br>
+</div>
+<br>
 
 
 <!-- Main content -->
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thread>
-                            <tr>
-                                <th>STT</th>
-                                <th>Mã Nhân Viên</th>
-                                <th>Tên nhân viên </th>
-                                <th>Chức Vụ </th>
-                                <th>Trình Độ</th>
-                                <th> Lịch làm việc</th>
-                                <th> Email </th>
-                                <th scope="col" colspan="2">Tùy chọn</th>
-                            </tr>
-                        </thread>
-                        <tbody>
-                            <?php
-                            //Truy vấn SQL lấy ra thông tin cá nhân, chức vụ, lịch làm việc.
-                                $get_c = "SELECT lv.level_name,emp.*,sc.time_in,sc.time_out,ps.position_name
-                                            FROM employee as emp, levels as lv, schedule as sc, position as ps
-                                            WHERE lv.id = emp.id_level 
-                                            AND sc.id = emp.id_schedule
-                                            AND ps.id = emp.id_position	";
-    
-                                $run_c = mysqli_query($conn,$get_c);
-                                $i=0;
-                                //Gán những thông tin lấy được vào các biến
-                                while($row_c=mysqli_fetch_array($run_c)){
-                                    $id = $row_c['id'];
-                                    $c_id = $row_c['employee_id'];
-                                    $name = $row_c['full_name'];
-                                    $p_name = $row_c['position_name'];
-                                    $lv_name = $row_c['level_name'];
-                                    $in = $row_c['time_in'];
-                                    $out = $row_c['time_out'];
-                                    
-                                    $c_email = $row_c['email'];
-                                    //Đổi kiểu time lịch làm việc
-                                    $t_in = strtotime($in);
-                                    $t_out = strtotime($out);
-                                    $i++;
-                                    
-                            ?>
-                            <tr>
-                                <!-- Show các biến ra ngoài -->
-                                    <td> <?php echo $i; ?> </td>
-                                    <td> <?php echo $c_id; ?> </td>
-                                    <td> <?php echo $name; ?> </td>
-                                    <td> <?php echo $p_name; ?> </td>
-                                    <td> <?php echo $lv_name; ?> </td>
-                                    <td> <?php echo  date('h:i A',$t_in)  .' - '.  date('h:i A',$t_out); ?> </td>
-                                    <td> <?php echo $c_email; ?> </td>
-                                    <td> 
-                                        <a href="index.php?edit_employee=<?php echo $id; ?>"class='btn btn-success btn-sm btn-flat edit'>
-                                            <i class="fa fa-edit"></i> Edit
-                                        </a>
-                                    </td>
-                                    <td> 
-                                        <a href="index.php?delete_employee=<?php echo $id; ?>" class='btn btn-danger btn-sm btn-flat delete'>
-                                            <i class="fa fa-trash"></i> Delete
-                                        </a>
-                                    </td>
-                            </tr>
-                            <?php  } ?>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã Nhân Viên</th>
+                            <th>Tên nhân viên </th>
+                            <th>Chức Vụ </th>
+                            <th>Trình Độ</th>
+                            <th> Lịch làm việc</th>
+                            <th> Email </th>
+                            <th scope="col" colspan="2">Tùy chọn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        //Truy vấn SQL lấy ra thông tin cá nhân, chức vụ, lịch làm việc.
+                            $get_c = "SELECT lv.level_name,emp.*,sc.time_in,sc.time_out,ps.position_name
+                                        FROM employee as emp, levels as lv, schedule as sc, position as ps
+                                        WHERE lv.id = emp.id_level 
+                                        AND sc.id = emp.id_schedule
+                                        AND ps.id = emp.id_position	
+                                        ORDER BY emp.id DESC";
+                            $run_c = mysqli_query($conn,$get_c);
+                            $i=0;
+                            //Gán những thông tin lấy được vào các biến
+                            while($row_c=mysqli_fetch_array($run_c)){
+                                $id = $row_c['id'];
+                                $c_id = $row_c['employee_id'];
+                                $name = $row_c['full_name'];
+                                $p_name = $row_c['position_name'];
+                                $lv_name = $row_c['level_name'];
+                                $in = $row_c['time_in'];
+                                $out = $row_c['time_out'];
+
+                                $c_email = $row_c['email'];
+                                //Đổi kiểu time lịch làm việc
+                                $t_in = strtotime($in);
+                                $t_out = strtotime($out);
+                                $i++;
+                        ?>
+                        <tr>
+                            <!-- Show các biến ra ngoài -->
+                                <td> <?php echo $i; ?> </td>
+                                <td> <?php echo $c_id; ?> </td>
+                                <td> <?php echo $name; ?> </td>
+                                <td> <?php echo $p_name; ?> </td>
+                                <td> <?php echo $lv_name; ?> </td>
+                                <td> <?php echo  date('h:i A',$t_in)  .' - '.  date('h:i A',$t_out); ?> </td>
+                                <td> <?php echo $c_email; ?> </td>
+                                <td>
+                                    <a href="index.php?edit_employee=<?php echo $id; ?>"class='btn btn-success btn-sm btn-flat edit'>
+                                        <i class="fa fa-edit"></i> Chỉnh Sửa
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="index.php?delete_employee=<?php echo $id; ?>" class='btn btn-danger btn-sm btn-flat delete'>
+                                        <i class="fa fa-trash"></i> Xóa
+                                    </a>
+                                </td>
+                        </tr>
+                        <?php  } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -213,7 +213,6 @@
                                     <option>$s_id -$s1 - $s2</option>
                                 ";
                             }
-                            
                           ?>
                       </select>
                     </div>
@@ -237,9 +236,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="expert-id" class="col-sm-3 control-label" require>Giới tính</label>
+                        <label for="expert-id" class="col-sm-3 control-label">Giới tính</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control"  name="sex">
+                            <input type="radio" name="sex" id="gender" value="Nam"/>
+                            <label for="gender">Nam</label>
+
+                            <input type="radio" name="sex" id="gender" value="Nữ"/>
+                            <label for="gender">Nữ</label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -248,7 +251,6 @@
                             <input type="date" class="form-control"  name="birthday">
                         </div>
                     </div>
-                
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Đóng</button>
                         <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Lưu</button>
@@ -276,34 +278,37 @@
         $phone = $_POST['phone'];
         $sex = $_POST['sex'];
         $birthday = $_POST['birthday'];
-        $pass = 1234567;
+        $pass = md5('123456');
 
         $get_soluong = "select * from employee";
         $run_soluong = mysqli_query($conn, $get_soluong);
         while($row_soluong = mysqli_fetch_array($run_soluong)){
-        $soluong = $row_soluong['email'];
-        $idd = $row_soluong['employee_id'];
-
-        //Báo lỗi khi nhập trùng mã nhân viên và email
-        if ($idd ==  $id) {
-            echo "<script>alert('Mã nhân viên đã tồn tại')</script>";
-
-            exit();
-
-            
-
-        } 
-        if ($soluong ==  $email) {
-
-            echo "<script>alert('Email đã tồn tại')</script>";
-
-            exit();
-          
-
-        } }
+            $soluong = $row_soluong['email'];
+            $idd = $row_soluong['employee_id'];
+            //Báo lỗi khi nhập trùng mã nhân viên và email
+            if ($idd ==  $id) {
+                echo "<script>alert('Mã nhân viên đã tồn tại')</script>";
+                exit();
+            }
+            if ($soluong ==  $email) {
+                echo "<script>alert('Email đã tồn tại')</script>";
+                exit();
+            }
+        }
         
         //Thực hiện thêm dữ liệu từ các biến 
-        $insert_emp = "insert into employee( employee_id, full_name, id_level, id_position, id_schedule, email,pass,address,phone,sex,birthday) 
+        $insert_emp = "insert into employee(
+                                         employee_id, 
+                                         full_name,
+                                         id_level,
+                                         id_position,
+                                         id_schedule,
+                                         email,
+                                         pass,
+                                         address,
+                                         phone,
+                                         sex,
+                                         birthday) 
                         VALUES ( '$id','$name','$level','$pos', '$sc', '$email','$pass','$address','$phone','$sex','$birthday')";
         $run_emp = mysqli_query($conn,$insert_emp);
         if($run_emp){

@@ -10,6 +10,8 @@
         
     }else{
         $admin_session = $_SESSION['admin_email'];
+        echo "hello";
+        echo $admin_session;
         $get_admin = "select * from admins where admin_email='$admin_session'";
         $run_admin = mysqli_query($conn,$get_admin);
         $row_admin = mysqli_fetch_array($run_admin);

@@ -51,7 +51,6 @@
                         <div class="separator">
                         <div class="clearfix"></div>
                         <br />
-
                             <div>
                                 <h1><i class="fa fa-paw"></i> Sandwitch Group !</h1>
                                 <p>©2017 All Rights Reserved. Sandwitch Group</p>
