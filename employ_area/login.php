@@ -1,10 +1,11 @@
 <?php
-    session_start();
-    include("includes/db.php");
+session_start();
+include("includes/db.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -34,7 +35,7 @@
                 <section class="login_content">
                     <form action="" method="post">
                         <h1>Log in your Account</h1>
-                        
+
                         <div>
                             <input type="email" id="userName" name="email" class="form-control" placeholder="Email" required="" />
                         </div>
@@ -49,8 +50,8 @@
                         <div class="clearfix"></div>
 
                         <div class="separator">
-                        <div class="clearfix"></div>
-                        <br />
+                            <div class="clearfix"></div>
+                            <br />
                             <div>
                                 <h1><i class="fa fa-paw"></i> Sandwitch Group !</h1>
                                 <p>©2017 All Rights Reserved. Sandwitch Group</p>
@@ -62,37 +63,32 @@
         </div>
     </div>
 </body>
+
 </html>
 
-<?php 
+<?php
 
-    if(isset($_POST['login'])){
-        
-        $email = mysqli_real_escape_string($conn,$_POST['email']);
-        
-        $pass = mysqli_real_escape_string($conn,$_POST['pass']);
-        
-        $get_emp = "select * from employee where email='$email' AND pass='$pass'";
-        
-        $run_emp = mysqli_query($conn,$get_emp);
-        
-        $count = mysqli_num_rows($run_emp);
-        
-        if($count==1){
-            
-            $_SESSION['email'] = $email;
-            
-            echo "<script>alert('Đăng nhập thành công. Xin chào')</script>";
-            
-            echo "<script>window.open('index.php?employee_list','_self')</script>";
-            
-        }else{
-            
-            echo "<script>alert('Sai email hoặc mật khẩu!')</script>";
-            
-        }
-        
+if (isset($_POST['login'])) {
+
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+
+    $pass = mysqli_real_escape_string($conn, $_POST['pass']);
+    $pass_md5 = md5($pass);
+
+    $get_emp = "select * from employee where email='$email' AND pass='$pass_md5'";
+    $run_emp = mysqli_query($conn, $get_emp);
+    $count = mysqli_num_rows($run_emp);
+
+    if ($count == 1) {
+
+        $_SESSION['email'] = $email;
+
+        echo "<script>alert('Đăng nhập thành công. Xin chào')</script>";
+
+        echo "<script>window.open('index.php?employee_list','_self')</script>";
+    } else {
+        echo "<script>alert('Sai email hoặc mật khẩu!')</script>";
     }
+}
 
 ?>
-
