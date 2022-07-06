@@ -54,7 +54,6 @@
                       $luong = $row_c['basic_salary'];
                       //Đổi kiểu time lịch làm việc
                       $i++;
-
                     ?>
                       <tr>
                         <td> <?php echo $i; ?></td>
@@ -62,7 +61,6 @@
                         <td><?php echo $name; ?></td>
                         <td>
                           <?php
-
                           $ab = 0;
                           $u = 1;
                           $tl = 0;
@@ -77,7 +75,6 @@
                             $v = 10;
                             $tl = $ab - $v; //Lương phạt
                             $tlt = $ab + $v; //Lương thưởng
-
                           }
                           echo  $ab . ' %';
                           ?>
@@ -110,7 +107,7 @@
                           ?>
 
                         </td>
-                        <td> /
+                        <td>
                           <!-- Tổng kết -->
                           <?php
                           $cc = 0;
@@ -128,8 +125,6 @@
                           } else {
                             echo $ab . ' %';
                           }
-
-
                           ?>
 
                         </td>

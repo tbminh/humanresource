@@ -63,8 +63,6 @@ include("includes/db.php");
     </div>
     </div><br>
 
-
-
     <!-- Main content -->
     <div class="row">
         <div class="col-lg-12">
@@ -84,26 +82,23 @@ include("includes/db.php");
                             </tr>
                         </thread>
                         <?php
-
                         global $db;
                         $i = 0;
                         if (isset($_GET['search'])) {
-
                             $find = "%{$_GET['user_query']}%";
 
                             $get_products = "SELECT lv.level_name, u.*, sc.time_in,sc.time_out,ps.position_name
-                FROM users as u, levels as lv, schedule as sc, position as ps
-                WHERE lv.id = u.id_level 
-                AND sc.id = u.id_schedule
-                AND ps.id = u.id_position	
-                AND ( u.full_name like '$find' or u.email like'$find' or u.employee_id like'$find' or u.phone like'$find') ";
+                            FROM users as u, levels as lv, schedule as sc, position as ps
+                            WHERE lv.id = u.id_level 
+                            AND sc.id = u.id_schedule
+                            AND ps.id = u.id_position	
+                            AND ( u.full_name like '$find' or u.email like'$find' or u.employee_id like'$find' or u.phone like'$find') ";
 
                             $run_products = mysqli_query($db, $get_products);
 
                             $count = mysqli_num_rows($run_products);
 
                             if ($count > 0) {
-
                                 while ($row_c = mysqli_fetch_array($run_products)) {
                                     $i++;
                                     $id = $row_c['id'];
@@ -113,7 +108,6 @@ include("includes/db.php");
                                     $lv_name = $row_c['level_name'];
                                     $in = $row_c['time_in'];
                                     $out = $row_c['time_out'];
-
                                     $c_email = $row_c['email'];
                                     $c_email = $row_c['email'];
                                     //Đổi kiểu time lịch làm việc
@@ -122,41 +116,34 @@ include("includes/db.php");
 
                                     $ab = date('h:i A', $t_in)  . ' - ' .  date('h:i A', $t_out);
                                     echo "
-                <tbody>
-                <tr>
-                <td>  $i </td>
-                <td>  $c_id </td>
-                <td>  $name </td>
-                <td> $p_name </td>
-                <td>  $lv_name </td>
-                <td>   $ab </td>
-                <td>  $c_email  </td>
-                <td> 
-                    <a href='index.php?edit_employee= $id 'class='btn btn-success btn-sm btn-flat edit'>
-                        <i class='fa fa-edit'></i> Edit
-                    </a>
-                </td>
-                <td> 
-                    <a href='index.php?delete_employee= $id ' class='btn btn-danger btn-sm btn-flat delete'>
-                        <i class='fa fa-trash'></i> Delete
-                    </a>
-                </td>
-            
-            </tr>
-            
-            </tbody>
-        
-        
-        ";
+                                        <tbody>
+                                            <tr>
+                                                <td> $i </td>
+                                                <td> $c_id </td>
+                                                <td> $name </td>
+                                                <td> $p_name </td>
+                                                <td> $lv_name </td>
+                                                <td> $ab </td>
+                                                <td> $c_email  </td>
+                                                <td> 
+                                                    <a href='index.php?edit_employee= $id 'class='btn btn-success btn-sm btn-flat edit'>
+                                                        <i class='fa fa-edit'></i> Edit
+                                                    </a>
+                                                </td>
+                                                <td> 
+                                                    <a href='index.php?delete_employee= $id ' class='btn btn-danger btn-sm btn-flat delete'>
+                                                        <i class='fa fa-trash'></i> Delete
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>";
                                 }
                             } else {
                                 echo "<script>alert('Không tìm thấy nhân viên nào')</script>";
-
                                 echo "<script>window.open('index.php?view_employee','_self')</script>";
                             }
                         }
                         ?>
-
                     </table>
                 </div>
             </div>
@@ -164,14 +151,9 @@ include("includes/db.php");
     </div>
 
     <div class="modal fade" id="search">
-
         <?php
-
         getsearch();
-
         ?>
-
-
     </div>
 
     <div class="modal fade" id="addnew">
@@ -334,9 +316,7 @@ include("includes/db.php");
                 exit();
             }
             if ($soluong ==  $email) {
-
                 echo "<script>alert('Email đã tồn tại')</script>";
-
                 exit();
             }
         }

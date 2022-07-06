@@ -21,10 +21,12 @@ if (!isset($_SESSION['admin_email'])) {
     $admin_country = $row_admin['address'];
     $admin_contact = $row_admin['phone'];
     $admin_birthday = $row_admin['birthday'];
+    $admin_gender = $row_admin['sex'];
 ?>
 
     <!DOCTYPE html>
     <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

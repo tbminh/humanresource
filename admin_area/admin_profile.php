@@ -67,42 +67,51 @@ if (!isset($_SESSION['admin_email'])) {
                             </ul>
                         </div>
                         <div class="card-body">
-                            <form action="" method="POST" enctype="multipart/form-data">
+                            <form action="" method="POST">
                                 <div class="form-group">
                                     <br /><label for="admin_id">Họ và tên:</label>
-                                    <input type="text" name="admin_name" class="form-control" value="<?php echo $admin_name; ?>" disabled>
+                                    <input type="text" name="name" class="form-control" value="<?php echo $admin_name; ?>" disabled>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Email:</label>
-                                    <input type="email" class="form-control" name="admin_email" value="<?php echo $admin_email; ?>">
+                                    <input type="email" class="form-control" name="email" value="<?php echo $admin_email; ?>">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Ngày sinh:</label>
-                                    <input type="date" class="form-control" name="admin_birthday" value="<?php echo $admin_birthday; ?>">
-                                </div>
-
-
-                                <div class="form-group ">
-                                    <label for=""> Điện thoại </label>
-                                    <input type="number" class="form-control" name="admin_contact" value="<?php echo '0' . $admin_contact; ?>">
+                                    <input type="date" class="form-control" name="birthday" value="<?php echo $admin_birthday; ?>">
                                 </div>
                                 <br>
                                 <div class="form-group">
                                     <label for="expert-id" class="col-sm-2 control-label" style="padding-left: 0px !important;">Giới tính</label>
                                     <div class="col-sm-10">
-                                        <input type="radio" name="sex" id="gender" value="Nam" />
-                                        <label for="gender">Nam</label>
-                                        &emsp;&emsp;
-                                        <input type="radio" name="sex" id="gender" value="Nữ" />
-                                        <label for="gender">Nữ</label>
+                                        <?php
+                                        if ($admin_gender == 'Nam') {
+                                            echo "<input type='radio' name='sex' id='gender' value='Nam' checked/>
+                                                        <label for='gender'>Nam</label>
+                                                        &emsp;&emsp;
+                                                        <input type='radio' name='sex' id='gender' value='Nữ' />
+                                                        <label for='gender'>Nữ</label>";
+                                        } else {
+                                            echo "<input type='radio' name='sex' id='gender' value='Nam' />
+                                                        <label for='gender'>Nam</label>
+                                                        &emsp;&emsp;
+                                                        <input type='radio' name='sex' id='gender' value='Nữ' checked/>
+                                                        <label for='gender'>Nữ</label>";
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="form-group">
+                                    <label for=""> Điện thoại </label>
+                                    <input type="number" class="form-control" name="phone" value="<?php echo '0' . $admin_contact; ?>">
+                                </div>
+
+                                <div class="form-group">
                                     <label for="admin_id">Địa chỉ</label>
-                                    <input type="text" class="form-control" name="admin_country" value="<?php echo $admin_country; ?>">
+                                    <input type="text" class="form-control" name="address" value="<?php echo $admin_country; ?>">
                                 </div>
 
                                 <div class="form-group text-right">
@@ -163,14 +172,14 @@ if (!isset($_SESSION['admin_email'])) {
 ?>
 <?php
 if (isset($_POST['update_pr'])) {
-    $email = $_POST['admin_email'];
-    $birthday = $_POST['admin_birthday'];
-    $phone = $_POST['admin_contact'];
-    $address = $_POST['admin_country'];
-
+    $email = $_POST['email'];
+    $birthday = $_POST['birthday'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $gender = $_POST['sex'];
     // Cập nhật thông tin
-    $update = "update admins set admin_email='$email',admin_birthday = '$birthday', admin_contact='$phone',admin_country='$address'
-                    where admin_id='$admin_id'";
+    $update = "update admins set email='$email',birthday = '$birthday', phone='$phone',address='$address',sex = '$gender'
+                        where admin_id='$admin_id'";
     $run = mysqli_query($conn, $update);
     if ($run) {
         echo "<script>alert('Cập nhật thông tin thành công!')</script>";
@@ -183,7 +192,6 @@ if (isset($_POST['update_p'])) {
     $old = $_POST['old'];
     $new = $_POST['new'];
     $confirm = $_POST['confirm'];
-
     if ($old == "" || $new == "" || $confirm == "") {
         echo "<script>alert('Hãy Điền đầy đủ thông tin!')</script>";
     } else if ($old != $admin_pass) {
@@ -193,7 +201,7 @@ if (isset($_POST['update_p'])) {
     } else if ($new != $confirm) {
         echo "<script>alert('Xác nhận mật khẩu không đúng!')</script>";
     } else {
-        $update_pass = "update admins set admin_pass='$new' where admin_id='$admin_id'";
+        $update_pass = "update admins set pass='$new' where id='$admin_id'";
         $run_pass = mysqli_query($conn, $update_pass);
         echo "<script>alert('Cập nhật thông tin thành công!')</script>";
         echo "<script>window.open('index.php?profile_admin','_self')</script>";

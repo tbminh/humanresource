@@ -164,8 +164,7 @@ if (!isset($_SESSION['admin_email'])) {
                                     while ($row_l = mysqli_fetch_array($run_l)) {
                                         $l_id = $row_l['id'];
                                         $l_name = $row_l['level_name'];
-                                        echo "
-                                <option>$l_id - $l_name</option>";
+                                        echo "<option>$l_id - $l_name</option>";
                                     }
                                     ?>
                                 </select>
@@ -234,11 +233,11 @@ if (!isset($_SESSION['admin_email'])) {
                         <div class="form-group">
                             <label for="expert-id" class="col-sm-3 control-label">Giới tính</label>
                             <div class="col-sm-9">
-                                <input type="radio" name="sex" id="gender" value="Nam" />
-                                <label for="gender">Nam</label>
+                                <input type="radio" name="sex" id="sex" value="Nam" />
+                                <label for="sex">Nam</label>
 
-                                <input type="radio" name="sex" id="gender" value="Nữ" />
-                                <label for="gender">Nữ</label>
+                                <input type="radio" name="sex" id="sex" value="Nữ" />
+                                <label for="sex">Nữ</label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -285,7 +284,7 @@ if (isset($_POST['add'])) {
     while ($row_soluong = mysqli_fetch_array($run_soluong)) {
         $soluong = $row_soluong['email'];
         $idd = $row_soluong['employee_id'];
-        //Báo lỗi khi nhập trùng mã nhân viên và email
+        //Báo lỗi khi nhập trùng mã nhân viên hoặc email
         if ($idd ==  $id) {
             echo "<script>alert('Mã nhân viên đã tồn tại')</script>";
             exit();

@@ -117,7 +117,9 @@ if (!isset($_SESSION['admin_email'])) {
                             <a href="index.php?edit_attendance=<?php echo $a_id; ?>" data-toggle="modal" class='btn btn-success btn-sm btn-flat edit'><i class='fa fa-edit'></i> Edit</a>
                           </td>
                           <td>
-                            <a href="index.php?delete_attendance=<?php echo $a_id; ?>" onclick="confirm('Xác nhận xóa?')" class='btn btn-danger btn-sm btn-flat delete'><i class='fa fa-trash'></i> Delete</a>
+                            <a href="index.php?delete_attendance=<?php echo $a_id; ?>" onclick="return confirm('Xác nhận xóa?')" class='btn btn-danger btn-sm btn-flat delete'>
+                              <i class='fa fa-trash'></i> Delete
+                            </a>
                           </td>
                         </tr>
                       <?php } ?>
