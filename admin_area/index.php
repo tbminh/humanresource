@@ -2,8 +2,6 @@
 session_start();
 include("includes/db.php");
 include("functions/functions.php");
-
-
 if (!isset($_SESSION['admin_email'])) {
 
     echo "<script>window.open('login.php','_self')</script>";

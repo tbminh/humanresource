@@ -75,7 +75,7 @@ if (isset($_POST['login'])) {
     $pass = mysqli_real_escape_string($conn, $_POST['pass']);
     $pass_md5 = md5($pass);
 
-    $get_emp = "select * from employee where email='$email' AND pass='$pass_md5'";
+    $get_emp = "select * from users where email='$email' AND pass='$pass_md5'";
     $run_emp = mysqli_query($conn, $get_emp);
     $count = mysqli_num_rows($run_emp);
 

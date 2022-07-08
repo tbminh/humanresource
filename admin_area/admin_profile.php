@@ -89,16 +89,16 @@ if (!isset($_SESSION['admin_email'])) {
                                         <?php
                                         if ($admin_gender == 'Nam') {
                                             echo "<input type='radio' name='sex' id='gender' value='Nam' checked/>
-                                                        <label for='gender'>Nam</label>
-                                                        &emsp;&emsp;
-                                                        <input type='radio' name='sex' id='gender' value='Nữ' />
-                                                        <label for='gender'>Nữ</label>";
+                                                            <label for='gender'>Nam</label>
+                                                            &emsp;&emsp;
+                                                            <input type='radio' name='sex' id='gender' value='Nữ' />
+                                                            <label for='gender'>Nữ</label>";
                                         } else {
                                             echo "<input type='radio' name='sex' id='gender' value='Nam' />
-                                                        <label for='gender'>Nam</label>
-                                                        &emsp;&emsp;
-                                                        <input type='radio' name='sex' id='gender' value='Nữ' checked/>
-                                                        <label for='gender'>Nữ</label>";
+                                                            <label for='gender'>Nam</label>
+                                                            &emsp;&emsp;
+                                                            <input type='radio' name='sex' id='gender' value='Nữ' checked/>
+                                                            <label for='gender'>Nữ</label>";
                                         }
                                         ?>
                                     </div>
@@ -171,15 +171,15 @@ if (!isset($_SESSION['admin_email'])) {
 <?php }
 ?>
 <?php
-if (isset($_POST['update_pr'])) {
-    $email = $_POST['email'];
-    $birthday = $_POST['birthday'];
-    $phone = $_POST['phone'];
-    $address = $_POST['address'];
-    $gender = $_POST['sex'];
+if (isset($_PUT['update_pr'])) {
+    $email = $_PUT['email'];
+    $birthday = $_PUT['birthday'];
+    $gender = $_PUT['sex'];
+    $phone = $_PUT['phone'];
+    $address = $_PUT['address'];
     // Cập nhật thông tin
     $update = "update admins set email='$email',birthday = '$birthday', phone='$phone',address='$address',sex = '$gender'
-                        where admin_id='$admin_id'";
+                            where admin_id='$admin_id'";
     $run = mysqli_query($conn, $update);
     if ($run) {
         echo "<script>alert('Cập nhật thông tin thành công!')</script>";
@@ -191,20 +191,25 @@ if (isset($_POST['update_pr'])) {
 if (isset($_POST['update_p'])) {
     $old = $_POST['old'];
     $new = $_POST['new'];
+    $old_md5 = md5($old);
+    $new_md5 = md5($new);
     $confirm = $_POST['confirm'];
+
     if ($old == "" || $new == "" || $confirm == "") {
         echo "<script>alert('Hãy Điền đầy đủ thông tin!')</script>";
-    } else if ($old != $admin_pass) {
+    } else if ($old_md5 != $admin_pass) {
         echo "<script>alert('Mật khẩu cũ nhập không chính xác, đảm bảo đã tắt caps lock!')</script>";
     } else if (strlen($new) < 6) {
         echo "<script>alert('Mật khẩu quá ngắn, hãy thử với mật khẩu khác an toàn hơn!')</script>";
     } else if ($new != $confirm) {
         echo "<script>alert('Xác nhận mật khẩu không đúng!')</script>";
     } else {
-        $update_pass = "update admins set pass='$new' where id='$admin_id'";
+        $update_pass = "update users set pass='$new_md5' where id='$admin_id'";
         $run_pass = mysqli_query($conn, $update_pass);
-        echo "<script>alert('Cập nhật thông tin thành công!')</script>";
-        echo "<script>window.open('index.php?profile_admin','_self')</script>";
+        if ($run_pass) {
+            echo "<script>alert('Đổi mật khẩu thành công!')</script>";
+            echo "<script>window.open('index.php?profile_admin','_self')</script>";
+        }
     }
 }
 ?>

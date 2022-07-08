@@ -156,9 +156,7 @@ if (!isset($_SESSION['admin_email'])) {
                       $id = $row_emp['id'];
                       $emp_id = $row_emp['employee_id'];
                       $emp_name = $row_emp['full_name'];
-                      echo "
-                                <option> $id - $emp_id - $emp_name </option>
-                              ";
+                      echo "<option> $id - $emp_id - $emp_name </option>";
                     }
                     ?>
                   </select>
@@ -174,7 +172,6 @@ if (!isset($_SESSION['admin_email'])) {
               </div>
               <div class="form-group">
                 <label for="time_in" class="col-sm-3 control-label">Giờ vào làm</label>
-
                 <div class="col-sm-9">
                   <div class="bootstrap-timepicker">
                     <input type="time" class="form-control timepicker" id="time_in" name="time_in">
@@ -203,11 +200,9 @@ if (!isset($_SESSION['admin_email'])) {
                     $st0 = "Đi trễ";
                     $st2 = "Vắng";
 
-                    echo "
-                          <option> $st1  </option>
+                    echo "<option> $st1  </option>
                           <option> $st0  </option>
-                          <option> $st2 </option>
-                        ";
+                          <option> $st2 </option>";
                     ?>
                   </select>
                   <!--40e-->
@@ -215,7 +210,6 @@ if (!isset($_SESSION['admin_email'])) {
                 <!--39e-->
               </div>
               <!--38e-->
-
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Đóng</button>
@@ -226,31 +220,29 @@ if (!isset($_SESSION['admin_email'])) {
       </div>
     </div>
 
-    <?php
-    if (isset($_POST['add'])) {
-      $id = $_POST['employ'];
-      $date = $_POST['date'];
-      $time_in = $_POST['time_in'];
-      $time_out = $_POST['time_out'];
-      $get = $_POST['status'];
-      if ($get == "Đúng giờ") {
-        $status = 1;
-      } else if ($get == "Đi trễ") {
-        $status = 0;
-      } else {
-        $status = 2;
+      <?php
+      if (isset($_POST['add'])) {
+        $id = $_POST['employ'];
+        $date = $_POST['date'];
+        $time_in = $_POST['time_in'];
+        $time_out = $_POST['time_out'];
+        $get = $_POST['status'];
+        if ($get == "Đúng giờ") {
+          $status = 1;
+        } else if ($get == "Đi trễ") {
+          $status = 0;
+        } else {
+          $status = 2;
+        }
+
+        $insert_a = "insert into attendance (employ_id,work_day,start_time,finish_time,status) values ('$id','$date','$time_in','$time_out','$status')";
+        $run_a = mysqli_query($conn, $insert_a);
+        if ($run_a) {
+          echo "<script>alert('Bạn đã thêm điểm danh mới thành công')</script>";
+          echo "<script>window.open('index.php?view_attendance','_self')</script>";
+        }
       }
-
-
-      $insert_a = "insert into attendance (employ_id,work_day,start_time,finish_time,status) values ('$id','$date','$time_in','$time_out','$status')";
-      $run_a = mysqli_query($conn, $insert_a);
-      if ($run_a) {
-        echo "<script>alert('Bạn đã thêm điểm danh mới thành công')</script>";
-        echo "<script>window.open('index.php?view_attendance','_self')</script>";
-      }
-    }
-    ?>
-
+      ?>
 
     <script>
       $(function() {
@@ -269,8 +261,6 @@ if (!isset($_SESSION['admin_email'])) {
         });
       });
     </script>
-
-
   </body>
 
   </html>

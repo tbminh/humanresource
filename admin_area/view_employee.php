@@ -53,7 +53,6 @@ if (!isset($_SESSION['admin_email'])) {
     </div>
     <br>
 
-
     <!-- Main content -->
     <div class="row">
         <div class="col-lg-12">
@@ -127,18 +126,17 @@ if (!isset($_SESSION['admin_email'])) {
         </div>
     </div>
 
-
     <div class="modal fade" id="addnew">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     <h4 class="modal-title"><b>Thêm Nhân Viên</b></h4>
                 </div>
                 <div class="modal-body">
                     <form action="" method="POST" class="form-horizontal">
-
                         <div class="form-group">
                             <label for="expert-id" class="col-sm-3 control-label" require>Mã Nhân Viên</label>
                             <div class="col-sm-9">
@@ -204,9 +202,7 @@ if (!isset($_SESSION['admin_email'])) {
                                         $t_out = strtotime($out);
                                         $s1 = date('h:i A', $t_in);
                                         $s2 = date('h:i A', $t_out);
-                                        echo "
-                                    <option>$s_id -$s1 - $s2</option>
-                                ";
+                                        echo "<option>$s_id -$s1 - $s2</option>";
                                     }
                                     ?>
                                 </select>
@@ -248,7 +244,7 @@ if (!isset($_SESSION['admin_email'])) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Đóng</button>
-                            <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Lưu</button>
+                            <button type="submit" name="add" class="btn btn-primary btn-flat"><i class="fa fa-save"></i> Lưu</button>
                         </div>
                     </form>
                 </div>
@@ -312,6 +308,8 @@ if (isset($_POST['add'])) {
     if ($run_emp) {
         echo "<script>alert('Bạn đã thêm nhân viên thành công')</script>";
         echo "<script>window.open('index.php?view_employee','_self')</script>";
+    } else {
+        echo "Thêm không thành công";
     }
 }
 ?>

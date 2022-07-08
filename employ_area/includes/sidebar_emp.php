@@ -25,7 +25,7 @@
     <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>Sandwitch Group !</span></a>
+            <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>HRM Group !</span></a>
         </div>
 
         <div class="clearfix"></div>
@@ -100,13 +100,13 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
-                            <a href="" onclick="myFunction()" class="user-profile dropdown-toggle">
+                            <a href="#" onclick="myFunction()" class="user-profile dropdown-toggle">
                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""><?php echo $name; ?>
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul id="myDropdown" class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="#;"> Profile</a></li>
-                                <li><a href="#"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                <li><a href="index.php?employee_profile"> Profile</a></li>
+                                <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -105,7 +105,6 @@ if (!isset($_SESSION['admin_email'])) {
                             </div>
                         </div>
 
-
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Đóng</button>
                             <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Lưu</button>
