@@ -20,14 +20,10 @@ if (!isset($_SESSION['admin_email'])) {
                             <div class="text-center">
                                 <a href="#" class="d-block"><?php echo $admin_name ?></a>
                             </div>
-
                             <p class="text-muted text-center">
                                 Quản trị viên
                             </p>
-
                             <a href="#update_p" data-toggle="modal" class="btn btn-primary btn-block" style="width: 80%; margin-left:30px;"><i class="fa fa-key"></i><b>Đổi mật khẩu</b></a><br>
-
-
                             <!-- About Me Box -->
                             <div class="card card-primary">
                                 <!-- /.card-header -->
@@ -67,7 +63,7 @@ if (!isset($_SESSION['admin_email'])) {
                             </ul>
                         </div>
                         <div class="card-body">
-                            <form action="" method="POST">
+                            <!-- <form action="" method="POST">
                                 <div class="form-group">
                                     <br /><label for="admin_id">Họ và tên:</label>
                                     <input type="text" name="name" class="form-control" value="<?php echo $admin_name; ?>" disabled>
@@ -89,16 +85,67 @@ if (!isset($_SESSION['admin_email'])) {
                                         <?php
                                         if ($admin_gender == 'Nam') {
                                             echo "<input type='radio' name='sex' id='gender' value='Nam' checked/>
-                                                            <label for='gender'>Nam</label>
-                                                            &emsp;&emsp;
-                                                            <input type='radio' name='sex' id='gender' value='Nữ' />
-                                                            <label for='gender'>Nữ</label>";
+                                                                <label for='gender'>Nam</label>
+                                                                &emsp;&emsp;
+                                                                <input type='radio' name='sex' id='gender' value='Nữ' />
+                                                                <label for='gender'>Nữ</label>";
                                         } else {
                                             echo "<input type='radio' name='sex' id='gender' value='Nam' />
-                                                            <label for='gender'>Nam</label>
-                                                            &emsp;&emsp;
-                                                            <input type='radio' name='sex' id='gender' value='Nữ' checked/>
-                                                            <label for='gender'>Nữ</label>";
+                                                                <label for='gender'>Nam</label>
+                                                                &emsp;&emsp;
+                                                                <input type='radio' name='sex' id='gender' value='Nữ' checked/>
+                                                                <label for='gender'>Nữ</label>";
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for=""> Điện thoại </label>
+                                    <input type="number" class="form-control" name="phone" value="<?php echo '0' . $admin_contact; ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="admin_id">Địa chỉ</label>
+                                    <input type="text" class="form-control" name="address" value="<?php echo $admin_country; ?>">
+                                </div>
+
+                                <div class="form-group text-right">
+                                    <button type="submit" class="btn btn-primary" name="update_pr">Cập nhật</button>
+                                </div>
+                            </form> -->
+                            <form action="" method="POST" class="form-horizontal">
+                                <div class="form-group">
+                                    <br /><label for="admin_id">Họ và tên:</label>
+                                    <input type="text" name="name" class="form-control" value="<?php echo $admin_name; ?>" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Email:</label>
+                                    <input type="email" class="form-control" name="email" value="<?php echo $admin_email; ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Ngày sinh:</label>
+                                    <input type="date" class="form-control" name="birthday" value="<?php echo $admin_birthday; ?>">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="expert-id" class="col-sm-2 control-label" style="text-align: left !important;">Giới tính</label>
+                                    <div class="col-sm-6">
+                                        <?php
+                                        if ($admin_gender == 'Nam') {
+                                            echo "<input type='radio' name='sex' id='gender' value='Nam' checked/>
+                                                    <label for='gender'>Nam</label>
+                                                    &emsp;&emsp;
+                                                    <input type='radio' name='sex' id='gender' value='Nữ' />
+                                                    <label for='gender'>Nữ</label>";
+                                        } else {
+                                            echo "<input type='radio' name='sex' id='gender' value='Nam' />
+                                                <label for='gender'>Nam</label>
+                                                &emsp;&emsp;
+                                                <input type='radio' name='sex' id='gender' value='Nữ' checked/>
+                                                <label for='gender'>Nữ</label>";
                                         }
                                         ?>
                                     </div>
@@ -171,15 +218,16 @@ if (!isset($_SESSION['admin_email'])) {
 <?php }
 ?>
 <?php
-if (isset($_PUT['update_pr'])) {
-    $email = $_PUT['email'];
-    $birthday = $_PUT['birthday'];
-    $gender = $_PUT['sex'];
-    $phone = $_PUT['phone'];
-    $address = $_PUT['address'];
+if (isset($_POST['update_pr'])) {
+    // echo "<script>alert('Hãy Điền đầy đủ thông tin!')</script>";
+    $email = $_POST['email'];
+    $birthday = $_POST['birthday'];
+    $gender = $_POST['sex'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
     // Cập nhật thông tin
-    $update = "update admins set email='$email',birthday = '$birthday', phone='$phone',address='$address',sex = '$gender'
-                            where admin_id='$admin_id'";
+    $update = "update users set email='$email', birthday = '$birthday', phone='$phone', address='$address',sex = '$gender'
+                            where id='$admin_id'";
     $run = mysqli_query($conn, $update);
     if ($run) {
         echo "<script>alert('Cập nhật thông tin thành công!')</script>";

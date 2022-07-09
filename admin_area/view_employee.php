@@ -275,7 +275,7 @@ if (isset($_POST['add'])) {
     // $get_part = "DECLARE @depart_id varchar(10) =(select depart_id from position where id = '" + $pos + "')
     //             select department_id from department where id = @depart_id";
 
-    $get_soluong = "select * from users";
+    $get_soluong = "select * from users where id = '$id'";
     $run_soluong = mysqli_query($conn, $get_soluong);
     while ($row_soluong = mysqli_fetch_array($run_soluong)) {
         $soluong = $row_soluong['email'];
@@ -310,6 +310,6 @@ if (isset($_POST['add'])) {
         echo "<script>window.open('index.php?view_employee','_self')</script>";
     } else {
         echo "Thêm không thành công";
-    }
+    }   
 }
 ?>
