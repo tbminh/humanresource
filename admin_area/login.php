@@ -56,7 +56,7 @@ if (isset($_POST['admin_login'])) {
     $admin_pass = mysqli_real_escape_string($conn, $_POST['admin_pass']);
     $pass_md5 = md5($admin_pass);
     $get_admin = "select * from users
-                 where email='$admin_email'
+                  where email='$admin_email'
                   AND pass='$pass_md5'
                   AND role_id = 1";
 

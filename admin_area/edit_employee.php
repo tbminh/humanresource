@@ -93,14 +93,15 @@ if (!isset($_SESSION['admin_email'])) {
                                 <label for="employee" class="col-sm-3 control-label">Trình Độ</label>
                                 <div class="col-md-6">
                                     <select name="level" class="form-control">
-                                        <option> <?php echo $levels; ?> </option>
+                                        <option value="<?php echo $level; ?>"> <?php echo $levels; ?></option>
+                                        <option value="">Chọn trình độ</option>
                                         <?php
                                         $get_l = "SELECT * FROM levels";
                                         $run_l = mysqli_query($conn, $get_l);
                                         while ($row_l = mysqli_fetch_array($run_l)) {
                                             $l_id = $row_l['id'];
                                             $l_name = $row_l['level_name'];
-                                            echo "<option>$l_id - $l_name</option>";
+                                            echo "<option value = '$l_id' >$l_name</option>";
                                         }
                                         ?>
                                     </select>
@@ -111,14 +112,15 @@ if (!isset($_SESSION['admin_email'])) {
                                 <label for="employee" class="col-sm-3 control-label">Chức Vụ</label>
                                 <div class="col-md-6">
                                     <select name="pos" class="form-control">
-                                        <option> <?php echo $poss; ?> </option>
+                                        <option value="<?php echo $pos; ?>"> <?php echo $poss; ?> </option>
+                                        <option value="">Chọn vị trí</option>
                                         <?php
-                                        $get_l = "SELECT * FROM position";
-                                        $run_l = mysqli_query($conn, $get_l);
-                                        while ($row_l = mysqli_fetch_array($run_l)) {
-                                            $l_id = $row_l['id'];
-                                            $l_name = $row_l['position_name'];
-                                            echo "<option>$l_id - $l_name</option>";
+                                        $get_p = "SELECT * FROM position";
+                                        $run_p = mysqli_query($conn, $get_p);
+                                        while ($row_p = mysqli_fetch_array($run_p)) {
+                                            $p_id = $row_p['id'];
+                                            $p_name = $row_p['position_name'];
+                                            echo "<option value ='$p_id' >$p_name</option>";
                                         }
                                         ?>
                                     </select>
@@ -128,23 +130,21 @@ if (!isset($_SESSION['admin_email'])) {
                                 <label for="employee" class="col-sm-3 control-label">Lịch Làm Việc</label>
                                 <div class="col-md-6">
                                     <select name="sc" class="form-control">
-                                        <option> <?php echo  date('h:i A', $t_in)  . ' - ' .  date('h:i A', $t_out); ?> </option>
+                                        <option value="<?php echo $sc; ?>"><?php echo  date('h:i A', $t_in)  . ' - ' .  date('h:i A', $t_out); ?> </option>
+                                        <option value="">Chọn lịch biểu</option>
                                         <?php
-                                        $get_l = "SELECT * FROM schedule";
-                                        $run_l = mysqli_query($conn, $get_l);
-                                        while ($row_l = mysqli_fetch_array($run_l)) {
-                                            $s_id = $row_l['id'];
-                                            $in = $row_l['time_in'];
-                                            $out = $row_l['time_out'];
+                                        $get_s = "SELECT * FROM schedule";
+                                        $run_s = mysqli_query($conn, $get_s);
+                                        while ($row_s = mysqli_fetch_array($run_s)) {
+                                            $s_id = $row_s['id'];
+                                            $in = $row_s['time_in'];
+                                            $out = $row_s['time_out'];
                                             $t_in = strtotime($in);
                                             $t_out = strtotime($out);
                                             $s1 = date('h:i A', $t_in);
                                             $s2 = date('h:i A', $t_out);
-                                            echo "
-                                    <option>$s_id -$s1 - $s2</option>
-                                ";
+                                            echo "<option value = '$s_id'>$s1 - $s2</option>";
                                         }
-
                                         ?>
                                     </select>
                                 </div>
@@ -174,7 +174,6 @@ if (!isset($_SESSION['admin_email'])) {
                                     <input value="<?php echo $c_sex; ?>" name="sex" type="text" class="form-control" required>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label class="col-md-3 control-label"> Ngày sinh </label>
                                 <div class="col-md-6">
@@ -212,12 +211,10 @@ if (!isset($_SESSION['admin_email'])) {
         $phone = $_POST['phone'];
         $sex = $_POST['sex'];
         $birthday = $_POST['birthday'];
-        $level = $_POST['level'];
-        $pos = $_POST['pos'];
-        $sc = $_POST['sc'];
-
-
-        $update_emp = "update users set employee_id='$idd',full_name='$name',id_level='$level',id_position='$pos',id_schedule='$sc',email='$email',address='$address',phone='$phone',sex='$sex',birthday='$birthday' where id='$id'";
+        $l_id = $_POST['level'];
+        $p_id = $_POST['pos'];
+        $s_id = $_POST['sc'];
+        $update_emp = "update users set employee_id='$idd',full_name='$name',id_level='$l_id',id_position='$p_id',id_schedule='$s_id',email='$email',address='$address',phone='$phone',sex='$sex',birthday='$birthday' where id='$id'";
         $run_emp = mysqli_query($conn, $update_emp);
 
         if ($run_emp) {
