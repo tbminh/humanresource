@@ -7,8 +7,8 @@ if (!isset($_SESSION['admin_email'])) {
     echo "<script>window.open('login.php','_self')</script>";
 } else {
     $admin_session = $_SESSION['admin_email'];
-    echo "hello";
-    echo $admin_session;
+    // echo "hello";
+    // echo $admin_session;
     $get_admin = "select * from users where email='$admin_session'";
     $run_admin = mysqli_query($conn, $get_admin);
     $row_admin = mysqli_fetch_array($run_admin);

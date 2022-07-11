@@ -39,7 +39,6 @@ if (!isset($_SESSION['admin_email'])) {
         $in = $rowsc['time_in'];
         $out = $rowsc['time_out'];
 
-
         //Đổi kiểu time lịch làm việc
         $t_in = strtotime($in);
         $t_out = strtotime($out);
@@ -111,7 +110,7 @@ if (!isset($_SESSION['admin_email'])) {
                                 <label for="employee" class="col-sm-3 control-label">Chức Vụ</label>
                                 <div class="col-md-6">
                                     <select name="pos" class="form-control">
-                                        <option> <?php echo $poss; ?> </option>
+                                        <option><?php echo $poss; ?> </option>
                                         <?php
                                         $get_l = "SELECT * FROM position";
                                         $run_l = mysqli_query($conn, $get_l);
@@ -140,11 +139,8 @@ if (!isset($_SESSION['admin_email'])) {
                                             $t_out = strtotime($out);
                                             $s1 = date('h:i A', $t_in);
                                             $s2 = date('h:i A', $t_out);
-                                            echo "
-                                    <option>$s_id -$s1 - $s2</option>
-                                ";
+                                            echo "<option>$s_id -$s1 - $s2</option>";
                                         }
-
                                         ?>
                                     </select>
                                 </div>
@@ -215,7 +211,6 @@ if (!isset($_SESSION['admin_email'])) {
         $level = $_POST['level'];
         $pos = $_POST['pos'];
         $sc = $_POST['sc'];
-
 
         $update_emp = "update users set employee_id='$idd',full_name='$name',id_level='$level',id_position='$pos',id_schedule='$sc',email='$email',address='$address',phone='$phone',sex='$sex',birthday='$birthday' where id='$id'";
         $run_emp = mysqli_query($conn, $update_emp);
