@@ -162,7 +162,7 @@ if (!isset($_SESSION['admin_email'])) {
                                     while ($row_l = mysqli_fetch_array($run_l)) {
                                         $l_id = $row_l['id'];
                                         $l_name = $row_l['level_name'];
-                                        echo "<option>$l_id - $l_name</option>";
+                                        echo "<option value='$l_id'>$l_name</option>";
                                     }
                                     ?>
                                 </select>
@@ -175,12 +175,12 @@ if (!isset($_SESSION['admin_email'])) {
                                 <select name="pos" class="form-control">
                                     <option>--------- Chức Vụ Nhân Viên ---------</option>
                                     <?php
-                                    $get_l = "SELECT * FROM position";
-                                    $run_l = mysqli_query($conn, $get_l);
-                                    while ($row_l = mysqli_fetch_array($run_l)) {
-                                        $l_id = $row_l['id'];
-                                        $l_name = $row_l['position_name'];
-                                        echo "<option>$l_id - $l_name</option>";
+                                    $get_p = "SELECT * FROM position";
+                                    $run_p = mysqli_query($conn, $get_p);
+                                    while ($row_p = mysqli_fetch_array($run_p)) {
+                                        $p_id = $row_p['id'];
+                                        $p_name = $row_p['position_name'];
+                                        echo "<option value='$p_id'>$p_name</option>";
                                     }
                                     ?>
                                 </select>
@@ -192,17 +192,17 @@ if (!isset($_SESSION['admin_email'])) {
                                 <select name="sc" class="form-control">
                                     <option>--------- Chọn Lịch Làm Việc ---------</option>
                                     <?php
-                                    $get_l = "SELECT * FROM schedule";
-                                    $run_l = mysqli_query($conn, $get_l);
-                                    while ($row_l = mysqli_fetch_array($run_l)) {
-                                        $s_id = $row_l['id'];
-                                        $in = $row_l['time_in'];
-                                        $out = $row_l['time_out'];
+                                    $get_s = "SELECT * FROM schedule";
+                                    $run_s = mysqli_query($conn, $get_s);
+                                    while ($row_s = mysqli_fetch_array($run_s)) {
+                                        $s_id = $row_s['id'];
+                                        $in = $row_s['time_in'];
+                                        $out = $row_s['time_out'];
                                         $t_in = strtotime($in);
                                         $t_out = strtotime($out);
                                         $s1 = date('h:i A', $t_in);
                                         $s2 = date('h:i A', $t_out);
-                                        echo "<option>$s_id -$s1 - $s2</option>";
+                                        echo "<option value='$s_id'>$s1 - $s2</option>";
                                     }
                                     ?>
                                 </select>
@@ -261,36 +261,32 @@ if (isset($_POST['add'])) {
     // Gán giá trị đã nhập vào các biến
     $id = $_POST['employ'];
     $name = $_POST['name'];
-    $level = $_POST['level'];
-    $pos = $_POST['pos'];
-    $sc = $_POST['sc'];
+    $level_id = $_POST['level'];
+    $pos_id = $_POST['pos'];
+    $sc_id = $_POST['sc'];
     $email = $_POST['email'];
     $address = $_POST['address'];
     $phone = $_POST['phone'];
     $sex = $_POST['sex'];
     $birthday = $_POST['birthday'];
     $pass = md5('12345');
-
-    // $rand_id = rand(1000, 9999);
-    // $get_part = "DECLARE @depart_id varchar(10) =(select depart_id from position where id = '" + $pos + "')
-    //             select department_id from department where id = @depart_id";
-
-    $get_soluong = "select * from users where id = '$id'";
-    $run_soluong = mysqli_query($conn, $get_soluong);
-    while ($row_soluong = mysqli_fetch_array($run_soluong)) {
-        $soluong = $row_soluong['email'];
-        $idd = $row_soluong['employee_id'];
-        //Báo lỗi khi nhập trùng mã nhân viên hoặc email
-        if ($idd ==  $id) {
-            echo "<script>alert('Mã nhân viên đã tồn tại')</script>";
-            exit();
-        }
-        if ($soluong ==  $email) {
-            echo "<script>alert('Email đã tồn tại')</script>";
-            exit();
-        }
-    }
-    //Thực hiện thêm dữ liệu từ các biến 
+    
+    // $get_soluong = "select * from users where id = '$id'";
+    // $run_soluong = mysqli_query($conn, $get_soluong);
+    // while ($row_soluong = mysqli_fetch_array($run_soluong)) {
+    //     $soluong = $row_soluong['email'];
+    //     $idd = $row_soluong['employee_id'];
+    //     //Báo lỗi khi nhập trùng mã nhân viên hoặc email
+    //     if ($idd ==  $id) {
+    //         echo "<script>alert('Mã nhân viên đã tồn tại')</script>";
+    //         exit();
+    //     }
+    //     if ($soluong ==  $email) {
+    //         echo "<script>alert('Email đã tồn tại')</script>";
+    //         exit();
+    //     }
+    // }
+    // //Thực hiện thêm dữ liệu từ các biến 
     $insert_emp = "insert into users(
                                     employee_id, 
                                     full_name,
@@ -303,13 +299,13 @@ if (isset($_POST['add'])) {
                                     phone,
                                     sex,
                                     birthday) 
-                    VALUES ( '$id','$name','$level','$pos', '$sc', '$email','$pass','$address','$phone','$sex','$birthday')";
+                    VALUES ( '$id','$name','$level_id','$pos_id','$sc_id', '$email','$pass','$address','$phone','$sex','$birthday')";
     $run_emp = mysqli_query($conn, $insert_emp);
     if ($run_emp) {
         echo "<script>alert('Bạn đã thêm nhân viên thành công')</script>";
         echo "<script>window.open('index.php?view_employee','_self')</script>";
     } else {
-        echo "Thêm không thành công";
-    }   
+        echo "<script>alert('Thêm không thành công')</script>";
+    }
 }
 ?>
