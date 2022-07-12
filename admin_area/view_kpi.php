@@ -56,6 +56,7 @@ if (!isset($_SESSION['admin_email'])) {
               <div class="search-container">
                 <input type="text" placeholder="Search.." name="kpi_query" required>
                 <button href="#kpi_search" type="submit" name="kpi_search"><i class="fa fa-search"></i></button>
+              </div>
             </form>
           </div>
         </div>
@@ -77,11 +78,8 @@ if (!isset($_SESSION['admin_email'])) {
                     <th>Đơn vị tính</th>
                     <th>Đánh giá </th>
                     <th scope="col" colspan="2">Tùy chọn</th>
-
                   </thead>
                   <tbody>
-
-
                     <?php
                     $i = 0;
                     //Thực hiện truy vấn SQL show ra toàn bộ kpi

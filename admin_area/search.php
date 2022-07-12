@@ -87,7 +87,7 @@ include("includes/db.php");
                         if (isset($_GET['search'])) {
                             $find = "%{$_GET['user_query']}%";
 
-                            $get_products = "SELECT lv.level_name, u.*, sc.time_in,sc.time_out,ps.position_name
+                            $get_products = "SELECT lv.level_name, u.*, sc.*,ps.position_name
                             FROM users as u, levels as lv, schedule as sc, position as ps
                             WHERE lv.id = u.id_level 
                             AND sc.id = u.id_schedule
@@ -97,7 +97,6 @@ include("includes/db.php");
                             $run_products = mysqli_query($db, $get_products);
 
                             $count = mysqli_num_rows($run_products);
-
                             if ($count > 0) {
                                 while ($row_c = mysqli_fetch_array($run_products)) {
                                     $i++;
@@ -109,7 +108,7 @@ include("includes/db.php");
                                     $in = $row_c['time_in'];
                                     $out = $row_c['time_out'];
                                     $c_email = $row_c['email'];
-                                    $c_email = $row_c['email'];
+                                    $sc_name = $row_c['schedule_name'];
                                     //Đổi kiểu time lịch làm việc
                                     $t_in = strtotime($in);
                                     $t_out = strtotime($out);
@@ -123,8 +122,8 @@ include("includes/db.php");
                                                 <td> $name </td>
                                                 <td> $p_name </td>
                                                 <td> $lv_name </td>
-                                                <td> $ab </td>
-                                                <td> $c_email  </td>
+                                                <td> $sc_name </td>
+                                                <td> $c_email </td>
                                                 <td> 
                                                     <a href='index.php?edit_employee= $id 'class='btn btn-success btn-sm btn-flat edit'>
                                                         <i class='fa fa-edit'></i> Edit
@@ -192,8 +191,7 @@ include("includes/db.php");
                                     while ($row_l = mysqli_fetch_array($run_l)) {
                                         $l_id = $row_l['id'];
                                         $l_name = $row_l['level_name'];
-                                        echo "
-                                <option>$l_id - $l_name</option>";
+                                        echo "<option>$l_id - $l_name</option>";
                                     }
                                     ?>
                                 </select>
@@ -211,9 +209,7 @@ include("includes/db.php");
                                     while ($row_l = mysqli_fetch_array($run_l)) {
                                         $l_id = $row_l['id'];
                                         $l_name = $row_l['position_name'];
-                                        echo "
-                                <option>$l_id - $l_name</option>
-                              ";
+                                        echo "<option>$l_id - $l_name</option>";
                                     }
                                     ?>
                                 </select>
@@ -235,11 +231,8 @@ include("includes/db.php");
                                         $t_out = strtotime($out);
                                         $s1 = date('h:i A', $t_in);
                                         $s2 = date('h:i A', $t_out);
-                                        echo "
-                                    <option>$s_id -$s1 - $s2</option>
-                                ";
+                                        echo "<option>$s_id -$s1 - $s2</option>";
                                     }
-
                                     ?>
                                 </select>
                             </div>

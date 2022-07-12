@@ -53,9 +53,9 @@ if (!isset($_SESSION['admin_email'])) {
         <div class="topnav">
           <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Thêm mới</a>
           <div class="search-container">
-            <form action="">
-              <input type="text" placeholder="Search.." name="search">
-              <button type="submit"><i class="fa fa-search"></i></button>
+            <form method="get" action="index.php?attendance_search">
+              <input type="text" placeholder="Search.." name="att_query">
+              <button type="submit" name="attendance_search"><i class="fa fa-search"></i></button>
             </form>
           </div>
         </div><br>
@@ -71,6 +71,7 @@ if (!isset($_SESSION['admin_email'])) {
                       <th>Mã Nhân Viên</th>
                       <th>Họ Tên</th>
                       <th>Ngày</th>
+                      <th>Ca làm</th>
                       <th>Giờ vào ca</th>
                       <th>Giờ tan ca</th>
                       <th scope="col" colspan="2">Tùy chọn</th>
@@ -80,9 +81,10 @@ if (!isset($_SESSION['admin_email'])) {
                       <?php
                       $i = 0;
                       //Truy vấn lấy thông tin chấm công theo từng nhân viên
-                      $query = "SELECT u.*, att.* 
-                              FROM users as u, attendance as att
+                      $query = "SELECT u.*, att.*, sc.schedule_name
+                              FROM users as u, attendance as att, schedule as sc
                               WHERE u.id = att.employ_id
+                                    AND u.id_schedule = sc.id
                               ORDER BY att.id DESC";
                       $result = mysqli_query($conn, $query);
                       while ($row = mysqli_fetch_assoc($result)) {
@@ -91,6 +93,7 @@ if (!isset($_SESSION['admin_email'])) {
                         $emp_id = $row['employee_id'];
                         $name = $row['full_name'];
                         $work = $row['work_day'];
+                        $sc_name = $row['schedule_name'];
                         $start = $row['start_time'];
                         $finish = $row['finish_time'];
                         $status = ($row['status']);
@@ -110,6 +113,7 @@ if (!isset($_SESSION['admin_email'])) {
                           <td> <?php echo $emp_id ?> </td>
                           <td> <?php echo $name ?> </td>
                           <td> <?php echo $work ?> </td>
+                          <td> <?php echo $sc_name ?> </td>
                           <td> <?php echo $start . $status ?> </td>
                           <td> <?php echo $finish ?> </td>
 
@@ -220,29 +224,29 @@ if (!isset($_SESSION['admin_email'])) {
       </div>
     </div>
 
-      <?php
-      if (isset($_POST['add'])) {
-        $id = $_POST['employ'];
-        $date = $_POST['date'];
-        $time_in = $_POST['time_in'];
-        $time_out = $_POST['time_out'];
-        $get = $_POST['status'];
-        if ($get == "Đúng giờ") {
-          $status = 1;
-        } else if ($get == "Đi trễ") {
-          $status = 0;
-        } else {
-          $status = 2;
-        }
-
-        $insert_a = "insert into attendance (employ_id,work_day,start_time,finish_time,status) values ('$id','$date','$time_in','$time_out','$status')";
-        $run_a = mysqli_query($conn, $insert_a);
-        if ($run_a) {
-          echo "<script>alert('Bạn đã thêm điểm danh mới thành công')</script>";
-          echo "<script>window.open('index.php?view_attendance','_self')</script>";
-        }
+    <?php
+    if (isset($_POST['add'])) {
+      $id = $_POST['employ'];
+      $date = $_POST['date'];
+      $time_in = $_POST['time_in'];
+      $time_out = $_POST['time_out'];
+      $get = $_POST['status'];
+      if ($get == "Đúng giờ") {
+        $status = 1;
+      } else if ($get == "Đi trễ") {
+        $status = 0;
+      } else {
+        $status = 2;
       }
-      ?>
+
+      $insert_a = "insert into attendance (employ_id,work_day,start_time,finish_time,status) values ('$id','$date','$time_in','$time_out','$status')";
+      $run_a = mysqli_query($conn, $insert_a);
+      if ($run_a) {
+        echo "<script>alert('Bạn đã thêm điểm danh mới thành công')</script>";
+        echo "<script>window.open('index.php?view_attendance','_self')</script>";
+      }
+    }
+    ?>
 
     <script>
       $(function() {
