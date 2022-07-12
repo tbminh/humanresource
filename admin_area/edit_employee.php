@@ -39,7 +39,6 @@ if (!isset($_SESSION['admin_email'])) {
         $in = $rowsc['time_in'];
         $out = $rowsc['time_out'];
 
-
         //Đổi kiểu time lịch làm việc
         $t_in = strtotime($in);
         $t_out = strtotime($out);
