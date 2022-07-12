@@ -46,7 +46,7 @@ if (!isset($_SESSION['admin_email'])) {
             <form method="get" action="index.php?search">
                 <div class="search-container">
                     <input type="text" placeholder="Search.." name="user_query" required>
-                    <button href="#search" type="submit" name="search"><i class="fa fa-search"></i></button>
+                    <button type="submit" name="search"><i class="fa fa-search"></i></button>
                 </div>
             </form>
         </div>
@@ -66,15 +66,15 @@ if (!isset($_SESSION['admin_email'])) {
                                 <th>Tên nhân viên </th>
                                 <th>Chức Vụ </th>
                                 <th>Trình Độ</th>
-                                <th> Lịch làm việc</th>
-                                <th> Email </th>
+                                <th>Ca làm việc</th>
+                                <th>Email</th>
                                 <th scope="col" colspan="2">Tùy chọn</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             //Truy vấn SQL lấy ra thông tin cá nhân, chức vụ, lịch làm việc.
-                            $get_c = "SELECT lv.level_name, u.* ,sc.time_in,sc.time_out,ps.position_name
+                            $get_c = "SELECT lv.level_name, u.* ,sc.*,ps.position_name
                                         FROM users as u, levels as lv, schedule as sc, position as ps
                                         WHERE lv.id = u.id_level 
                                         AND sc.id = u.id_schedule
@@ -89,13 +89,8 @@ if (!isset($_SESSION['admin_email'])) {
                                 $name = $row_c['full_name'];
                                 $p_name = $row_c['position_name'];
                                 $lv_name = $row_c['level_name'];
-                                $in = $row_c['time_in'];
-                                $out = $row_c['time_out'];
-
+                                $sc_name = $row_c['schedule_name'];
                                 $c_email = $row_c['email'];
-                                //Đổi kiểu time lịch làm việc
-                                $t_in = strtotime($in);
-                                $t_out = strtotime($out);
                                 $i++;
                             ?>
                                 <tr>
@@ -105,7 +100,7 @@ if (!isset($_SESSION['admin_email'])) {
                                     <td> <?php echo $name; ?> </td>
                                     <td> <?php echo $p_name; ?> </td>
                                     <td> <?php echo $lv_name; ?> </td>
-                                    <td> <?php echo  date('h:i A', $t_in)  . ' - ' .  date('h:i A', $t_out); ?> </td>
+                                    <td> <?php echo $sc_name; ?></td>
                                     <td> <?php echo $c_email; ?> </td>
                                     <td>
                                         <a href="index.php?edit_employee=<?php echo $id; ?>" class='btn btn-success btn-sm btn-flat edit'>
@@ -270,25 +265,27 @@ if (isset($_POST['add'])) {
     $sex = $_POST['sex'];
     $birthday = $_POST['birthday'];
     $pass = md5('12345');
-    
-    // $get_soluong = "select * from users where id = '$id'";
-    // $run_soluong = mysqli_query($conn, $get_soluong);
-    // while ($row_soluong = mysqli_fetch_array($run_soluong)) {
-    //     $soluong = $row_soluong['email'];
-    //     $idd = $row_soluong['employee_id'];
-    //     //Báo lỗi khi nhập trùng mã nhân viên hoặc email
-    //     if ($idd ==  $id) {
-    //         echo "<script>alert('Mã nhân viên đã tồn tại')</script>";
-    //         exit();
-    //     }
-    //     if ($soluong ==  $email) {
-    //         echo "<script>alert('Email đã tồn tại')</script>";
-    //         exit();
-    //     }
-    // }
-    // //Thực hiện thêm dữ liệu từ các biến 
+    $role = 2;
+    // echo "$id - $name - $level_id - $pos_id - $sc_id - $email - $address - $phone - $sex - $birthday";
+    $get_soluong = "select * from users where id = '$id'";
+    $run_soluong = mysqli_query($conn, $get_soluong);
+    while ($row_soluong = mysqli_fetch_array($run_soluong)) {
+        $soluong = $row_soluong['email'];
+        $idd = $row_soluong['employee_id'];
+        //Báo lỗi khi nhập trùng mã nhân viên hoặc email
+        if ($idd ==  $id) {
+            echo "<script>alert('Mã nhân viên đã tồn tại')</script>";
+            exit();
+        }
+        if ($soluong ==  $email) {
+            echo "<script>alert('Email đã tồn tại')</script>";
+            exit();
+        }
+    }
+    //Thực hiện thêm dữ liệu từ các biến 
     $insert_emp = "insert into users(
                                     employee_id, 
+                                    role_id,
                                     full_name,
                                     id_level,
                                     id_position,
@@ -299,7 +296,7 @@ if (isset($_POST['add'])) {
                                     phone,
                                     sex,
                                     birthday) 
-                    VALUES ( '$id','$name','$level_id','$pos_id','$sc_id', '$email','$pass','$address','$phone','$sex','$birthday')";
+                    VALUES ( '$id','$role','$name','$level_id','$pos_id','$sc_id', '$email','$pass','$address','$phone','$sex','$birthday')";
     $run_emp = mysqli_query($conn, $insert_emp);
     if ($run_emp) {
         echo "<script>alert('Bạn đã thêm nhân viên thành công')</script>";

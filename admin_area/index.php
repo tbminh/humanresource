@@ -163,6 +163,9 @@ if (!isset($_SESSION['admin_email'])) {
                     if (isset($_GET['chuahoanthanh'])) {
                         include("chuahoanthanh.php");
                     }
+                    if (isset($_GET['attendance_search'])) {
+                        include("attendance_search.php");
+                    }
                     ?>
                 </div>
             </div>
