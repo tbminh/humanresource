@@ -74,7 +74,7 @@ if (!isset($_SESSION['admin_email'])) {
                         <tbody>
                             <?php
                             //Truy vấn SQL lấy ra thông tin cá nhân, chức vụ, lịch làm việc.
-                            $get_c = "SELECT lv.level_name, u.* ,sc.*,ps.position_name
+                            $get_c = "SELECT lv.level_name, u.* ,sc.schedule_name, ps.position_name
                                         FROM users as u, levels as lv, schedule as sc, position as ps
                                         WHERE lv.id = u.id_level 
                                         AND sc.id = u.id_schedule
@@ -108,7 +108,7 @@ if (!isset($_SESSION['admin_email'])) {
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="index.php?delete_employee=<?php echo $id; ?>" class='btn btn-danger btn-sm btn-flat delete'>
+                                        <a href="index.php?delete_employee=<?php echo $id; ?>" class="btn btn-danger btn-sm btn-flat delete" onclick="return confirm('Xác nhận xóa?')">
                                             <i class="fa fa-trash"></i> Xóa
                                         </a>
                                     </td>
@@ -266,7 +266,6 @@ if (isset($_POST['add'])) {
     $birthday = $_POST['birthday'];
     $pass = md5('12345');
     $role = 2;
-    // echo "$id - $name - $level_id - $pos_id - $sc_id - $email - $address - $phone - $sex - $birthday";
     $get_soluong = "select * from users where id = '$id'";
     $run_soluong = mysqli_query($conn, $get_soluong);
     while ($row_soluong = mysqli_fetch_array($run_soluong)) {
