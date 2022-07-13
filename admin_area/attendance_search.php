@@ -115,8 +115,7 @@ include("includes/db.php");
                                     $status = '<span class="label label-default pull-right">absent</span>';
                                 }
 
-                                echo "
-                                        <tbody>
+                                echo "<tbody>
                                             <tr>
                                                 <td> $i </td>
                                                 <td> $emp_id </td>

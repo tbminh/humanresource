@@ -9,7 +9,6 @@
 ?>
 
 <?php
-
     if (isset($_GET['hoanthanh'])) {
         $confirm_product_id = $_GET['hoanthanh'];
         $order_status = '0';
@@ -20,8 +19,6 @@
            
             echo "<script>window.open('index.php?view_kpi','_self')</script>";
         }
-    
-        
     }
 ?>
 

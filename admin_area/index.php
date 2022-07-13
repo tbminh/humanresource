@@ -166,6 +166,30 @@ if (!isset($_SESSION['admin_email'])) {
                     if (isset($_GET['attendance_search'])) {
                         include("attendance_search.php");
                     }
+                    if (isset($_GET['view_qltd'])) {
+                        include("view_qltd.php");
+                    }
+                    if (isset($_GET['view_list'])) {
+                        include("view_list.php");
+                    }
+                    if (isset($_GET['edit_list'])) {
+                        include("edit_list.php");
+                    }
+                    if (isset($_GET['delete_list'])) {
+                        include("delete_list.php");
+                    }
+                    if (isset($_GET['done_qltd'])) {
+                        include("done_qltd.php");
+                    }
+                    if (isset($_GET['donot_qltd'])) {
+                        include("donot_qltd.php");
+                    }
+                    if (isset($_GET['edit_qltd'])) {
+                        include("edit_qltd.php");
+                    }
+                    if (isset($_GET['delete_qltd'])) {
+                        include("delete_qltd.php");
+                    }
                     ?>
                 </div>
             </div>
