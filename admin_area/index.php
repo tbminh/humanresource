@@ -166,6 +166,12 @@ if (!isset($_SESSION['admin_email'])) {
                     if (isset($_GET['attendance_search'])) {
                         include("attendance_search.php");
                     }
+                    if (isset($_GET['attendance_search'])) {
+                        include("attendance_search.php");
+                    }
+                    if (isset($_GET['attendance_search'])) {
+                        include("attendance_search.php");
+                    }
                     ?>
                 </div>
             </div>
