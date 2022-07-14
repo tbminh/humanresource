@@ -10,11 +10,11 @@ if (!isset($_SESSION['admin_email'])) {
     <?php
     if (isset($_GET['edit_list'])) {
         $edit_id = $_GET['edit_list'];
-        $edit_ship_query = "select * from recruit_list where id='$edit_id'";
+        $edit_ship_query = "SELECT rl.* FROM recruit_list as rl where id='$edit_id'";
         $run_edit_ship = mysqli_query($conn, $edit_ship_query);
         $row_edit_ship = mysqli_fetch_array($run_edit_ship);
 
-        $rc_id = $row_edit_ship['recruitment_id '];
+        $rc_id = $row_edit_ship['recruitment_id'];
         $name = $row_edit_ship['apply_name'];
         $phone = $row_edit_ship['apply_phone'];
         $gender = $row_edit_ship['gender'];
@@ -24,10 +24,10 @@ if (!isset($_SESSION['admin_email'])) {
         $status = $row_edit_ship['apply_status'];
         //Lấy tên chức vụ
         // $get_emps = "select * from position where id ='$pos_id'";
-        $get_emps = "SELECT ps.position_name, rec.position_id , rec.recruit_id, list.recrutment_id
-                    FROM position as ps, recruit_manage as rec, recruit_list as list
-                    WHERE ps.id = rec.position_id
-                    AND rec.id = list.recruitment_id";
+        $get_emps = "   SELECT ps.position_name, rec.position_id , rec.recruit_id, list.recruitment_id
+                        FROM position as ps, recruit_manage as rec, recruit_list as list
+                        WHERE ps.id = rec.position_id
+                        AND rec.id = list.recruitment_id";
         $run_emps = mysqli_query($conn, $get_emps);
         $rows = mysqli_fetch_array($run_emps);
         $poss = $rows['position_name'];
@@ -56,36 +56,63 @@ if (!isset($_SESSION['admin_email'])) {
                     <form action="" class="form-horizontal" method="POST">
                         <div class="modal-body">
                             <form method="POST" class="form-horizontal">
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="position-id" class="col-sm-3 control-label" required>Mã tuyển dụng </label>
                                     <div class="col-sm-6">
-                                        <input value="<?php echo $rc_id; ?>" type="text" class="form-control" name="rc_id">
+                                        <input value="" type="text" class="form-control" name="rc_id">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label for="employee" class="col-sm-3 control-label">Chức Vụ</label>
                                     <div class="col-md-6">
                                         <select name="pos" class="form-control">
-                                            <option value="<?php echo $pos_id; ?>"> <?php echo $poss; ?> </option>
-                                            <option value="">---------- Chọn vị trí ----------</option>
+                                            <option value="<?php echo $edit_id; ?>"> <?php echo "$rc_id - $poss"; ?> </option>
+                                            <option value="">---------- Chọn mã tuyển dụng ----------</option>
                                             <?php
-                                            $get_p = "SELECT * FROM position";
-                                            $run_p = mysqli_query($conn, $get_p);
-                                            while ($row_p = mysqli_fetch_array($run_p)) {
-                                                $p_id = $row_p['id'];
+                                            $get_r = "SELECT ps.position_name, rec.recruit_id, list.*
+                                                        FROM position as ps, recruit_manage as rec, recruit_list as list
+                                                        WHERE ps.id = rec.position_id
+                                                        AND rec.id = list.recruitment_id";
+                                            $run_r = mysqli_query($conn, $get_r);
+                                            while($row_p = mysqli_fetch_array($run_r)) {
+                                                $id = $row_p['recruit_id'];
+                                                $rc_id = $row_p['recruit_id'];
                                                 $p_name = $row_p['position_name'];
-                                                echo "<option value ='$p_id' >$p_name</option>";
+                                                echo "<option value ='$id'>$rc_id - $p_name</option>";
                                             }
                                             ?>
                                         </select>
                                     </div>
                                 </div>
+                                
                                 <div class="form-group">
-                                    <label for="kpi-id" class="col-sm-3 control-label" require>Số lượng</label>
+                                    <label for="kpi-id" class="col-sm-3 control-label" required>Họ tên ứng viên</label>
                                     <div class="col-sm-6">
-                                        <input value="<?php echo $qty; ?>" type="number" class="form-control" name="qty">
+                                        <input value="<?php echo $name; ?>" type="text" class="form-control" name="name">
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="kpi-id" class="col-sm-3 control-label" required>Email</label>
+                                    <div class="col-sm-6">
+                                        <input value="<?php echo $email; ?>" type="text" class="form-control" name="email">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="kpi-id" class="col-sm-3 control-label" required>Ngày ứng tuyển</label>
+                                    <div class="col-sm-6">
+                                        <input value="<?php echo $date; ?>" type="text" class="form-control" name="date">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="kpi-id" class="col-sm-3 control-label" required>Điện thoại</label>
+                                    <div class="col-sm-6">
+                                        <input value="<?php echo "0$phone"; ?>" type="text" class="form-control" name="phone">
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="kpi-id" class="col-sm-3 control-label" required>Ngày đăng tuyển</label>
                                     <div class="col-sm-6">

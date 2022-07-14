@@ -130,7 +130,7 @@ include("includes/db.php");
                                                     </a>
                                                 </td>
                                                 <td> 
-                                                    <a href='index.php?delete_employee= $a_id ' class='btn btn-danger btn-sm btn-flat delete'>
+                                                    <a href='index.php?delete_employee= $a_id' class='btn btn-danger btn-sm btn-flat delete'>
                                                         <i class='fa fa-trash'></i> Delete
                                                     </a>
                                                 </td>
