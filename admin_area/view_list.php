@@ -42,10 +42,10 @@ if (!isset($_SESSION['admin_email'])) {
     <div class="topnav">
         <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Thêm mới</a>
         <div class="search-container">
-            <form method="get" action="index.php?search">
+            <form method="get" action="index.php?list_search">
                 <div class="search-container">
-                    <input type="text" placeholder="Search.." name="user_query" required>
-                    <button type="submit" name="search"><i class="fa fa-search"></i></button>
+                    <input type="text" placeholder="Search.." name="list_query" required>
+                    <button type="submit" name="list_search"><i class="fa fa-search"></i></button>
                 </div>
             </form>
         </div>

@@ -190,6 +190,9 @@ if (!isset($_SESSION['admin_email'])) {
                     if (isset($_GET['delete_qltd'])) {
                         include("delete_qltd.php");
                     }
+                    if (isset($_GET['list_search'])) {
+                        include("list_search.php");
+                    }
                     ?>
                 </div>
             </div>

@@ -164,14 +164,26 @@ if (!isset($_SESSION['admin_email'])) {
                             <div class="form-group">
                                 <label class="col-md-3 control-label"> Số điện thoại </label>
                                 <div class="col-md-6">
-                                    <input value="<?php echo $c_phone; ?>" name="phone" type="number" class="form-control" required>
+                                    <input value="<?php echo  "0$c_phone"; ?>" name="phone" type="text" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label"> Giới tính </label>
-                                <div class="col-md-6">
-                                    <input value="<?php echo $c_sex; ?>" name="sex" type="text" class="form-control" required>
-                                </div>
+                                <?php
+                                if ($admin_gender == 'Nam') {
+                                    echo "<input type='radio' name='sex' id='gender' value='Nam' checked/>
+                                            <label for='gender'>Nam</label>
+                                            &emsp;&emsp;
+                                            <input type='radio' name='sex' id='gender' value='Nữ' />
+                                            <label for='gender'>Nữ</label>";
+                                } else {
+                                    echo "<input type='radio' name='sex' id='gender' value='Nam' />
+                                        <label for='gender'>Nam</label>
+                                        &emsp;&emsp;
+                                        <input type='radio' name='sex' id='gender' value='Nữ' checked/>
+                                        <label for='gender'>Nữ</label>";
+                                }
+                                ?>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label"> Ngày sinh </label>

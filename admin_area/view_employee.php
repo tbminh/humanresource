@@ -294,7 +294,7 @@ if (isset($_POST['add'])) {
                                     address,
                                     phone,
                                     sex,
-                                    birthday) 
+                                    birthday)
                     VALUES ( '$id','$role','$name','$level_id','$pos_id','$sc_id', '$email','$pass','$address','$phone','$sex','$birthday')";
     $run_emp = mysqli_query($conn, $insert_emp);
     if ($run_emp) {
