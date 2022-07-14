@@ -55,7 +55,7 @@ if (!isset($_SESSION['admin_email'])) {
             <form method="get" action="index.php?kpi_search">
               <div class="search-container">
                 <input type="text" placeholder="Search.." name="kpi_query" required>
-                <button href="#kpi_search" type="submit" name="kpi_search"><i class="fa fa-search"></i></button>
+                <button type="submit" name="kpi_search"><i class="fa fa-search"></i></button>
               </div>
             </form>
           </div>
