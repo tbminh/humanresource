@@ -13,13 +13,12 @@ body{
     body{
         margin-top:50px;
     }
-
-#wrapper{
-    padding-left: 255px;
-}
-#page-wrapper{
-    padding: 10px;
-}
+    #wrapper{
+        padding-left: 255px;
+    }
+    #page-wrapper{
+        padding: 10px;
+    }
 }
 
 /* Top Navigation Styles */
@@ -60,7 +59,7 @@ body{
          width: 255px;
          overflow-y: auto;
          overflow-x: hidden;
-         background-color: #222222;
+         background-color: #f59042;
          padding-bottom:  40px;
          border-radius: 0;
 
