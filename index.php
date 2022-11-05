@@ -24,7 +24,7 @@ if (!isset($_SESSION['admin_email'])) {
     <html lang="en">
 
     <head>
-        <meta charset="UTF-8">
+        <me ta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Hệ Thống Quản Lý Nhân Sự</title>
         <link rel="stylesheet" href="css/bootstrap-337.min.css">
@@ -37,6 +37,7 @@ if (!isset($_SESSION['admin_email'])) {
             <?php
             include("includes/sidebar.php");
             ?>
+
             <div id="page-wrapper">
                 <div class="container-fluid">
                     <?php
@@ -197,7 +198,6 @@ if (!isset($_SESSION['admin_email'])) {
                 </div>
             </div>
         </div>
-
         <script src="js/jquery-331.min.js"></script>
         <script src="js/bootstrap-337.min.js"></script>
     </body>

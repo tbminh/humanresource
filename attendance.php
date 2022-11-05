@@ -114,9 +114,8 @@ if (!isset($_SESSION['admin_email'])) {
                           <td> <?php echo $name ?> </td>
                           <td> <?php echo $work ?> </td>
                           <td> <?php echo $sc_name ?> </td>
-                          <td> <?php echo $start . $status ?> </td>
+                          <td> <?php echo $start . $status ?></td>
                           <td> <?php echo $finish ?> </td>
-
                           <td>
                             <a href="index.php?edit_attendance=<?php echo $a_id; ?>" data-toggle="modal" class='btn btn-success btn-sm btn-flat edit'><i class='fa fa-edit'></i> Edit</a>
                           </td>

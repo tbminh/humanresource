@@ -43,7 +43,7 @@
                                 WHERE lv.id = u.id_level 
                                 
                                 AND sc.id = u.id_schedule
-                                AND ps.id = u.id_position		";
+                                AND ps.id = u.id_position";
 
                     $run_c = mysqli_query($conn, $get_c);
                     $i = 0;

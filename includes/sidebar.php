@@ -69,43 +69,43 @@ if (!isset($_SESSION['admin_email'])) {
                             <i class="fa fa-clock-o"></i>&nbsp; Ca Làm Việc
                         </a>
                     </li>
-                    <li class="list">
+                    <!-- <li class="list">
                         <a href="index.php?view_attendance">
                             <i class="fa fa-check-square"></i>&nbsp; Chấm Công
                         </a>
-                    </li>
+                    </li> -->
                     <li class="list">
                         <a href="index.php?view_department" data-toggle="collapse" data-target="#p_cat">
                             <i class="fa fa-object-group"></i>&nbsp; Đơn Vị
                         </a>
                     </li>
-                    <!-- <li class="list">
+                    <li class="list">
                         <a href="index.php?view_position" data-toggle="collapse" data-target="#cat">
                             <i class="fa fa-suitcase"></i>&nbsp; Chức vụ
                         </a>
-                    </li> -->
+                    </li>
 
-                    <!-- <li class="list">
+                    <li class="list">
                         <a href="index.php?view_kpi" data-toggle="collapse" data-target="#cat">
                             <i class="fa fa-bullseye"></i>&nbsp; Quản lý KPI
                         </a>
-                    </li> -->
+                    </li>
                     <li class="list">
                         <a href="index.php?view_salary" data-toggle="collapse" data-target="#boxes">
                             <i class="fa fa-credit-card-alt"></i>&nbsp; Quản lý mức lương
                         </a>
                     </li>
-                    <!-- <li class="list">
+                    <li class="list">
                         <a href="index.php?view_level" data-toggle="collapse" data-target="#coupon">
                             <i class="fa fa-graduation-cap"></i>&nbsp; Trình độ
                         </a>
-                    </li> -->
+                    </li>
 
-                    <!-- <li class="list">
+                    <li class="list">
                         <a href="index.php?view_ktkl" data-toggle="collapse" data-target="#ships">
                             <i class="fa fa-thumbs-up"></i>&nbsp; Khen Thưởng - Kỷ luật
                         </a>
-                    </li> -->
+                    </li>
                     <li class="list">
                         <a href="index.php?view_qltd" data-toggle="collapse" data-target="#ships">
                             <i class="fa fa-location-arrow"></i>&nbsp; Quản lý tuyển dụng

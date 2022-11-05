@@ -1,49 +1,62 @@
-
 <?php
-    if(!isset($_SESSION['admin_email'])){
+if (!isset($_SESSION['admin_email'])) {
 
-        echo "<script>window.open('login.php','_self')</script>";
-    }
-    else{
+    echo "<script>window.open('login.php','_self')</script>";
+} else {
 ?>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Năm', 'Bán Hàng', 'Chi Phí', 'Lợi Nhuận'],
-            ['2018', 1000, 400, 200],
-            ['2019', 1170, 460, 250],
-            ['2020', 660, 1120, 300],
-            ['2021', 1030, 540, 350]
-        ]);
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawVisualization);
 
-        var options = {
-            chart: {
-            title: 'Hiệu Suất Làm Việc Của Công Ty',
-            subtitle: 'Sales, Chi Phí, and Lợi Nhuận: 2018-2021',
-            }
-        };
+        function drawVisualization() {
+            // Some raw data (not necessarily accurate)
+            var data = google.visualization.arrayToDataTable([
+                ['Month', 'Di Động', 'Truyền Hình', 'Dịch Vụ Số', 'Chính Phủ Điện Tử', 'Du Lịch Thông Minh', 'Trung Bình'],
+                ['2018', 1002, 938, 522, 998, 450, 1006],
+                ['2019', 1120, 1120, 599, 1268, 288, 1158],
+                ['2020', 650, 1167, 587, 807, 397, 1305],
+                ['2021', 750, 1110, 615, 968, 215, 321],
+                ['2022', 136, 691, 629, 1026, 366, 569.6]
+            ]);
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+            var options = {
+                title: 'BIỂU ĐỒ THỐNG KÊ DOANH THU CÔNG TY TRONG 5 NĂM GẦN NHẤT',
+                vAxis: {
+                    title: 'Tỷ Đồng'
+                },
+                hAxis: {
+                    title: 'Tháng'
+                },
+                seriesType: 'bars',
+                series: {
+                    5: {
+                        type: 'line'
+                    }
+                }
+            };
 
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-    }
-</script>
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header"> Bảng điều khiển </h1>
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-dashboard"></i> Bảng điều khiển
-            </li>
-        </ol>
+            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"> Bảng điều khiển </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Bảng điều khiển
+                </li>
+            </ol>
+        </div>
     </div>
-</div>
-
-<div class="row">
+    <div id="chart_div" style="width: 1100px; height: 500px;"></div>
+    <!-- <div class="row">
     <div class="col-lg-3 col-md-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -52,7 +65,7 @@
                         <i class="fa fa-tasks fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge"> <?php echo 8;?> </div>
+                        <div class="huge"> <?php echo 8; ?> </div>
                             <div> Nhân viên </div>
                     </div>
                 </div>
@@ -150,8 +163,7 @@
             </a>
         </div>
     </div>
-</div>
-<div id="columnchart_material" style="width: 1200px; height: 500px;"></div>
-<?php 
+</div> -->
+<?php
 }
 ?>

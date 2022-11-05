@@ -115,8 +115,7 @@ if (!isset($_SESSION['admin_email'])) {
                                                 } else {
                                                     $status_pr = "<td style='color: grey;'> <b> Không đạt </b></td>";
                                                 }
-                                                echo "
-                                                        <tbody>
+                                                echo " <tbody>
                                                         <tr>
                                                             <td> $i </td>
                                                             <td> $rc_id</td>
@@ -146,7 +145,6 @@ if (!isset($_SESSION['admin_email'])) {
                                         }
                                     }
                                     ?>
-
                                 </table>
                             </div>
                         </div>
