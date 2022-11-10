@@ -30,7 +30,7 @@ if (!isset($_SESSION['admin_email'])) {
                         <thread>
                             <tr>
                                 <th> STT </th>
-                                <th> Mã lịch </th>
+                                <th> Ca Làm </th>
                                 <th> Giờ vào việc </th>
                                 <th> Giờ tan ca </th>
                                 <th scope="col" colspan="2" style="text-align: center; width: 25%;"> Tùy chọn </th>
@@ -45,7 +45,7 @@ if (!isset($_SESSION['admin_email'])) {
                             $run_s = mysqli_query($conn, $get_s);
                             while ($row = mysqli_fetch_array($run_s)) {
                                 $id = $row['id'];
-                                $s_id = $row['schedule_id'];
+                                $name = $row['schedule_name'];
                                 $in = $row['time_in'];
                                 $out = $row['time_out'];
                                 $i++;
@@ -53,7 +53,7 @@ if (!isset($_SESSION['admin_email'])) {
                                 <tr>
                                     <!-- Show các biến thông tin lịch làm việc ra ngoài -->
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $s_id; ?></td>
+                                    <td><?php echo $name; ?></td>
                                     <td><?php echo $in . " AM"; ?></td>
                                     <td><?php echo $out . " PM" ?></td>
                                     <td>

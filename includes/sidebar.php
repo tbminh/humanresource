@@ -5,7 +5,7 @@ if (!isset($_SESSION['admin_email'])) {
 } else {
 ?>
     <header class="main-header">
-        <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #2F4F4F;">
+        <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #057faf;">
             <a href="index.php?dashboard" class="navbar-brand" style="color: white; margin-left:50px;">HRM System</a>
             <div class="navbar-header">
 
@@ -90,11 +90,11 @@ if (!isset($_SESSION['admin_email'])) {
                             <i class="fa fa-bullseye"></i>&nbsp; Quản lý KPI
                         </a>
                     </li>
-                    <li class="list">
+                    <!-- <li class="list">
                         <a href="index.php?view_salary" data-toggle="collapse" data-target="#boxes">
                             <i class="fa fa-credit-card-alt"></i>&nbsp; Quản lý mức lương
                         </a>
-                    </li>
+                    </li> -->
                     <li class="list">
                         <a href="index.php?view_level" data-toggle="collapse" data-target="#coupon">
                             <i class="fa fa-graduation-cap"></i>&nbsp; Trình độ

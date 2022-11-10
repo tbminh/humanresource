@@ -7,18 +7,17 @@ if (!isset($_SESSION['admin_email'])) {
 
 ?>
     <section class="content-header">
-        <h1 style="color:blue;">
-            Phòng Ban
+        <h1>
+            Đơn Vị
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php?dashboard"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-            <li class="active">Phòng Ban</li>
+            <li class="active">Đơn Vị</li>
         </ol>
-
     </section>
     <div class="box-header with-border"></div>
     <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Thêm mới</a>
-    </div><br />
+    <br />
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">

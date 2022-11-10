@@ -70,8 +70,7 @@ if (!isset($_SESSION['admin_email'])) {
                 <table id="example1" class="table table-bordered">
                   <thead>
                     <th>STT</th>
-                    <th>Mã KPI</th>
-                    <th>Mã Nhân Viên</th>
+                    <th>Tên Nhân Viên</th>
                     <th>Tên KPI</th>
                     <th>Tháng giao</th>
                     <th>Tỉ trọng</th>
@@ -83,35 +82,31 @@ if (!isset($_SESSION['admin_email'])) {
                     <?php
                     $i = 0;
                     //Thực hiện truy vấn SQL show ra toàn bộ kpi
-                    $query = "SELECT * from kpi ";
+                    $query = "SELECT * from kpi";
                     $result = mysqli_query($conn, $query);
                     while ($row = mysqli_fetch_array($result)) {
                       //Gán các giá trị lấy được tự lệnh SQL vào các biến
                       $id = $row['id'];
-                      $id_kpi = $row['id_kpi'];
+                      // $id_kpi = $row['id_kpi'];
                       $emp_id = $row['employ_id'];
                       $kpi_name = $row['kpi_name'];
-                      $name = $row['full_name'];
+                      $name = $row['employ_name'];
                       $percent = $row['percent'];
                       $time = $row['time'];
                       $unit = $row['unit'];
                       $target = $row['target'];
                       $status = $row['status_kpi'];
                       $i++;
-
                       $date = strtotime($time);
                     ?>
                       <tr>
                         <!-- Show các biến ra ngoài -->
                         <td> <?php echo $i; ?> </td>
-                        <td> <?php echo $id_kpi; ?> </td>
                         <td> <?php echo $emp_id; ?> </td>
                         <td> <?php echo $kpi_name ?> </td>
-
                         <td> <?php echo date('m', $date) ?> </td>
-                        <td><?php echo $percent; ?></td>
+                        <td> <?php echo $percent; ?> </td>
                         <td> <?php echo $unit; ?> </td>
-
 
                         <td>
                           <?php
@@ -136,7 +131,6 @@ if (!isset($_SESSION['admin_email'])) {
                             <i class="fa fa-trash"></i> Delete
                           </a>
                         </td>
-
                       </tr>
                     <?php } ?>
                   </tbody>
@@ -178,8 +172,6 @@ if (!isset($_SESSION['admin_email'])) {
                   </select>
                 </div>
               </div>
-
-
 
               <div class="form-group">
                 <label for="position-id" class="col-sm-3 control-label" required>Mã KPI </label>

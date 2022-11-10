@@ -24,7 +24,7 @@ if (!isset($_SESSION['admin_email'])) {
     <html lang="en">
 
     <head>
-        <me ta charset="UTF-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Hệ Thống Quản Lý Nhân Sự</title>
         <link rel="stylesheet" href="css/bootstrap-337.min.css">

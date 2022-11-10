@@ -5,12 +5,12 @@ if (!isset($_SESSION['admin_email'])) {
 } else {
 ?>
     <section class="content-header">
-        <h1 style="color: blue;">
+        <h1>
             Nhân Viên
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php?dashboard"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-            <li class="active">Nhân Viên</li>
+            <li class="active">Danh Sách Nhân Sự</li>
         </ol>
     </section>
     <style>
@@ -85,7 +85,6 @@ if (!isset($_SESSION['admin_email'])) {
                             //Gán những thông tin lấy được vào các biến
                             while ($row_c = mysqli_fetch_array($run_c)) {
                                 $id = $row_c['id'];
-                                $c_id = $row_c['employee_id'];
                                 $name = $row_c['full_name'];
                                 $p_name = $row_c['position_name'];
                                 $lv_name = $row_c['level_name'];
@@ -96,7 +95,7 @@ if (!isset($_SESSION['admin_email'])) {
                                 <tr>
                                     <!-- Show các biến ra ngoài -->
                                     <td> <?php echo $i; ?> </td>
-                                    <td> <?php echo $c_id; ?> </td>
+                                    <td> <?php echo $id; ?> </td>
                                     <td> <?php echo $name; ?> </td>
                                     <td> <?php echo $p_name; ?> </td>
                                     <td> <?php echo $lv_name; ?> </td>
