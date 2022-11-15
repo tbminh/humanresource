@@ -13,8 +13,6 @@ if (!isset($_SESSION['admin_email'])) {
         $get_emp = "select * from users where id ='$id'";
         $run_emp = mysqli_query($conn, $get_emp);
         $row = mysqli_fetch_array($run_emp);
-
-        $c_id = $row['employee_id'];
         $c_name = $row['full_name'];
         $c_email = $row['email'];
         $c_address = $row['address'];
@@ -76,12 +74,6 @@ if (!isset($_SESSION['admin_email'])) {
                     </div>
                     <div class="panel-body">
                         <form method="POST" class="form-horizontal" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label class="col-md-3 control-label"> Mã Nhân viên </label>
-                                <div class="col-md-6">
-                                    <input value="<?php echo $c_id; ?>" name="id" type="text" class="form-control" required>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label"> Tên nhân viên </label>
                                 <div class="col-md-6">
@@ -170,17 +162,17 @@ if (!isset($_SESSION['admin_email'])) {
                             <div class="form-group">
                                 <label class="col-md-3 control-label"> Giới tính </label>
                                 <?php
-                                if ($admin_gender == 'Nam') {
-                                    echo "<input type='radio' name='sex' id='gender' value='Nam' checked/>
+                                if ($c_sex == 0) {
+                                    echo "<input type='radio' name='sex' id='gender' value='0' checked/>
                                             <label for='gender'>Nam</label>
                                             &emsp;&emsp;
-                                            <input type='radio' name='sex' id='gender' value='Nữ' />
+                                            <input type='radio' name='sex' id='gender' value='1' />
                                             <label for='gender'>Nữ</label>";
                                 } else {
-                                    echo "<input type='radio' name='sex' id='gender' value='Nam' />
+                                    echo "<input type='radio' name='sex' id='gender' value='0' />
                                         <label for='gender'>Nam</label>
                                         &emsp;&emsp;
-                                        <input type='radio' name='sex' id='gender' value='Nữ' checked/>
+                                        <input type='radio' name='sex' id='gender' value='1' checked/>
                                         <label for='gender'>Nữ</label>";
                                 }
                                 ?>
@@ -225,7 +217,7 @@ if (!isset($_SESSION['admin_email'])) {
         $l_id = $_POST['level'];
         $p_id = $_POST['pos'];
         $s_id = $_POST['sc'];
-        $update_emp = "update users set employee_id='$idd',full_name='$name',id_level='$l_id',id_position='$p_id',id_schedule='$s_id',email='$email',address='$address',phone='$phone',sex='$sex',birthday='$birthday' where id='$id'";
+        $update_emp = "update users set full_name='$name',id_level='$l_id',id_position='$p_id',id_schedule='$s_id',email='$email',address='$address',phone='$phone',sex='$sex',birthday='$birthday' where id='$id'";
         $run_emp = mysqli_query($conn, $update_emp);
 
         if ($run_emp) {

@@ -166,7 +166,7 @@ if (!isset($_SESSION['admin_email'])) {
                       $emp_id = $row_emp['id'];
                       $employ_id = $row_emp['employee_id'];
                       $emp_name = $row_emp['full_name'];
-                      echo "<option>  $emp_id - $employ_id - $emp_name</option>";
+                      echo "<option>  $emp_id - $emp_name</option>";
                     }
                     ?>
                   </select>
@@ -222,7 +222,7 @@ if (!isset($_SESSION['admin_email'])) {
   if (isset($_POST['add'])) {
     // Gán giá trị đã nhập vào các biến
     $emp_id = $_POST['employ_id'];
-    $emp_name = $_POST['employ_id'];
+    $emp_name = $_POST['full_name'];
     $id_kpi = $_POST['id_kpi'];
     $kpi_name = $_POST['kpi_name'];
     $unit = $_POST['unit'];

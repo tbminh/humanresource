@@ -17,7 +17,7 @@ if (!isset($_SESSION['admin_email'])) {
     </section>
     <div class="box-header with-border"></div>
     <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Thêm mới</a>
-    </div><br />
+    </div>
 
     <div class="row">
         <div class="col-lg-12">
@@ -30,7 +30,7 @@ if (!isset($_SESSION['admin_email'])) {
                                 <th> Mã phòng ban</th>
                                 <th> Mã chức vụ </th>
                                 <th> Tên chức vụ </th>
-                                <th> Luơng chưc vu </th>
+                                <th> Luơng chức vu </th>
                                 <th scope="col" colspan="2" style="text-align: center;"> Tùy chọn </th>
                             </tr>
                         </thead>

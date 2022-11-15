@@ -14,8 +14,7 @@ if (!isset($_SESSION['admin_email'])) {
         $run_edit_ship = mysqli_query($conn, $edit_ship_query);
         $row_edit_ship = mysqli_fetch_array($run_edit_ship);
 
-        $emp_id = $row_edit_ship['employ_id'];
-        $emp_name = $row_edit_ship['full_name'];
+        $emp_name = $row_edit_ship['employ_name'];
         $id_kpi = $row_edit_ship['id_kpi'];
         $kpi_name = $row_edit_ship['kpi_name'];
         $unit = $row_edit_ship['unit'];
@@ -94,7 +93,7 @@ if (!isset($_SESSION['admin_email'])) {
                                 <div class="form-group">
                                     <label for="kpi-id" class="col-sm-3 control-label" required>Chỉ Tiêu Giao </label>
                                     <div class="col-sm-6">
-                                        <input value="<?php echo $target; ?>" type="texy" step="any" class="form-control" name="target">
+                                        <input value="<?php echo number_format($target); ?>" type="texy" step="any" class="form-control" name="target">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -127,7 +126,7 @@ if (!isset($_SESSION['admin_email'])) {
 
             $update_ship = "update kpi set id_kpi='$id_kpi',kpi_name='$kpi_name',employ_id='$emp_id',full_name='$emp_name',unit='$unit',percent='$percent',target='$target',time='$time' where id='$edit_id'";
             $run_ship = mysqli_query($conn, $update_ship);
-            if($run_ship) {
+            if ($run_ship) {
                 echo "<script>alert('KPI của bạn đã được cập nhật thành công')</script>";
                 echo "<script>window.open('index.php?view_kpi','_self')</script>";
             }

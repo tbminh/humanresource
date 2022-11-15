@@ -131,12 +131,6 @@ if (!isset($_SESSION['admin_email'])) {
                 </div>
                 <div class="modal-body">
                     <form action="" method="POST" class="form-horizontal">
-                        <div class="form-group">
-                            <label for="expert-id" class="col-sm-3 control-label" require>Mã Nhân Viên</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" name="employ">
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <label for="expert-id" class="col-sm-3 control-label" require>Tên Nhân Viên</label>
@@ -253,7 +247,6 @@ if (!isset($_SESSION['admin_email'])) {
 //Nhận sự kiện 'add' từ nút thêm của modal
 if (isset($_POST['add'])) {
     // Gán giá trị đã nhập vào các biến
-    $id = $_POST['employ'];
     $name = $_POST['name'];
     $level_id = $_POST['level'];
     $pos_id = $_POST['pos'];
@@ -282,7 +275,6 @@ if (isset($_POST['add'])) {
     }
     //Thực hiện thêm dữ liệu từ các biến 
     $insert_emp = "insert into users(
-                                    employee_id, 
                                     role_id,
                                     full_name,
                                     id_level,
