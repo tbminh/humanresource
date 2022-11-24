@@ -16,10 +16,7 @@ include("includes/db.php");
     <section class="content-header">
         <h1 style="color: blue;">
             <a href="index.php?view_employee"> Nhân Viên</a>
-
         </h1>
-
-
         <ol class="breadcrumb">
             <li><a href="index.php?dashboard"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
             <li class="active">Nhân Viên</li>
@@ -72,7 +69,6 @@ include("includes/db.php");
                         <thread>
                             <tr>
                                 <th>STT</th>
-                                <th>Mã Nhân Viên</th>
                                 <th>Tên nhân viên </th>
                                 <th>Chức Vụ </th>
                                 <th>Trình Độ</th>
@@ -92,7 +88,7 @@ include("includes/db.php");
                             WHERE lv.id = u.id_level 
                             AND sc.id = u.id_schedule
                             AND ps.id = u.id_position	
-                            AND ( u.full_name like '$find' or u.email like'$find' or u.employee_id like'$find' or u.phone like'$find') ";
+                            AND (u.id like'$find' or u.full_name like '$find' or u.email like'$find' or u.phone like'$find') ";
 
                             $run_products = mysqli_query($db, $get_products);
 
@@ -101,7 +97,6 @@ include("includes/db.php");
                                 while ($row_c = mysqli_fetch_array($run_products)) {
                                     $i++;
                                     $id = $row_c['id'];
-                                    $c_id = $row_c['employee_id'];
                                     $name = $row_c['full_name'];
                                     $p_name = $row_c['position_name'];
                                     $lv_name = $row_c['level_name'];
@@ -118,7 +113,7 @@ include("includes/db.php");
                                         <tbody>
                                             <tr>
                                                 <td> $i </td>
-                                                <td> $c_id </td>
+                                                <td> $id </td>
                                                 <td> $name </td>
                                                 <td> $p_name </td>
                                                 <td> $lv_name </td>
@@ -269,8 +264,6 @@ include("includes/db.php");
                                 <input type="date" class="form-control" name="birthday">
                             </div>
                         </div>
-
-
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Đóng</button>
                             <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Lưu</button>

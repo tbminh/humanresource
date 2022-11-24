@@ -37,7 +37,6 @@ if (!isset($_SESSION['admin_email'])) {
             <?php
             include("includes/sidebar.php");
             ?>
-
             <div id="page-wrapper">
                 <div class="container-fluid">
                     <?php

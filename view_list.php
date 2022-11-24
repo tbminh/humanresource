@@ -40,7 +40,7 @@ if (!isset($_SESSION['admin_email'])) {
     </style>
     <br>
     <div class="topnav">
-        <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Thêm mới</a>
+        <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Thêm mới ứng viên</a>
         <div class="search-container">
             <form method="get" action="index.php?list_search">
                 <div class="search-container">
@@ -61,7 +61,6 @@ if (!isset($_SESSION['admin_email'])) {
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Mã tuyển dụng</th>
                                 <th>Chức Vụ</th>
                                 <th>Họ tên</th>
                                 <th>Điện thoại</th>
@@ -85,7 +84,6 @@ if (!isset($_SESSION['admin_email'])) {
                             //Gán những thông tin lấy được vào các biến
                             while ($row_c = mysqli_fetch_array($run_c)) {
                                 $id = $row_c['id'];
-                                $c_id = $row_c['recruit_id'];
                                 $p_name = $row_c['position_name'];
                                 $name = $row_c['apply_name'];
                                 $phone = $row_c['apply_phone'];
@@ -98,7 +96,6 @@ if (!isset($_SESSION['admin_email'])) {
                                 <tr>
                                     <!-- Show các biến ra ngoài -->
                                     <td> <?php echo $i; ?> </td>
-                                    <td> <?php echo $c_id; ?> </td>
                                     <td> <?php echo $p_name; ?> </td>
                                     <td> <?php echo $name; ?> </td>
                                     <td> <?php echo "0$phone"; ?></td>
@@ -146,14 +143,13 @@ if (!isset($_SESSION['admin_email'])) {
                 </div>
                 <div class="modal-body">
                     <form action="" method="POST" class="form-horizontal">
-
                         <div class="form-group">
                             <label for="employee" class="col-sm-3 control-label">Mã tuyển dụng</label>
                             <div class="col-md-6">
                                 <select name="rec" class="form-control">
-                                    <option>--------- Chọn mã tuyển dụng ---------</option>
+                                    <option>--------- Chọn vị trí tuyển dụng ---------</option>
                                     <?php
-                                    $get_p = "SELECT rc.recruit_id, p.position_name, rc.id
+                                    $get_p = "SELECT p.position_name, rc.id
                                                 FROM recruit_manage as rc, position as p
                                                 WHERE rc.position_id = p.id
                                                 AND rc.status = 0";
@@ -162,7 +158,7 @@ if (!isset($_SESSION['admin_email'])) {
                                         $r_id = $row_p['id'];
                                         $rc_id = $row_p['recruit_id'];
                                         $p_name = $row_p['position_name'];
-                                        echo "<option value='$r_id'>$rc_id - $p_name</option>";
+                                        echo "<option value='$r_id'>$p_name</option>";
                                     }
                                     ?>
                                 </select>
@@ -179,7 +175,7 @@ if (!isset($_SESSION['admin_email'])) {
                         <div class="form-group">
                             <label for="expert-id" class="col-sm-3 control-label" require>Điện thoại</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" name="phone">
+                                <input type="varchar" class="form-control" name="phone">
                             </div>
                         </div>
 
@@ -223,7 +219,6 @@ if (!isset($_SESSION['admin_email'])) {
             </div>
         </div>
     </div>
-
 <?php
 }
 ?>
@@ -239,13 +234,6 @@ if (isset($_POST['add'])) {
     $birthday = $_POST['birthday'];
     $date = $_POST['date'];
     $status = 0;
-    // echo "$id  - $name - $phone - $email - $sex - $birthday - $date - $status";
-    // $get_soluong = "select * from recruit_list where recruitment_id = '$id'";
-    // $run_soluong = mysqli_query($conn, $get_soluong);
-    // $row_soluong = mysqli_fetch_array($run_soluong);
-    // if ($row_soluong) {
-    //     echo "<script>alert('Mã ứng viên đã tồn tại')</script>";
-    // }
 
     // Thực hiện thêm dữ liệu từ các biến 
     $insert_emp = "insert into recruit_list(

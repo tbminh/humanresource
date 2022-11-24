@@ -14,7 +14,6 @@ if (!isset($_SESSION['admin_email'])) {
         $run_edit_ship = mysqli_query($conn, $edit_ship_query);
         $row_edit_ship = mysqli_fetch_array($run_edit_ship);
 
-        $rc_id = $row_edit_ship['recruit_id'];
         $pos_id = $row_edit_ship['position_id'];
         $qty = $row_edit_ship['quantity'];
         $date = $row_edit_ship['date_recruit'];
@@ -51,12 +50,6 @@ if (!isset($_SESSION['admin_email'])) {
                         <div class="modal-body">
                             <form method="POST" class="form-horizontal">
                                 <div class="form-group">
-                                    <label for="position-id" class="col-sm-3 control-label" required>Mã tuyển dụng </label>
-                                    <div class="col-sm-6">
-                                        <input value="<?php echo $rc_id; ?>" type="text" class="form-control" name="rc_id">
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label for="employee" class="col-sm-3 control-label">Chức Vụ</label>
                                     <div class="col-md-6">
                                         <select name="pos" class="form-control">
@@ -68,7 +61,7 @@ if (!isset($_SESSION['admin_email'])) {
                                             while ($row_p = mysqli_fetch_array($run_p)) {
                                                 $p_id = $row_p['id'];
                                                 $p_name = $row_p['position_name'];
-                                                echo "<option value ='$p_id' >$p_name</option>";
+                                                echo "<option value ='$p_id'>$p_name</option>";
                                             }
                                             ?>
                                         </select>
@@ -117,14 +110,12 @@ if (!isset($_SESSION['admin_email'])) {
 
         <?php
         if (isset($_POST['update'])) {
-            $rc_id = $_POST['rc_id'];
             $pos_id = $_POST['pos'];
             $qty = $_POST['qty'];
             $date = $_POST['date'];
             $expire = $_POST['expire'];
-            // echo "$rc_id - $pos_id - $qty - $date - $expire";
 
-            $update_ship = "update recruit_manage set recruit_id='$rc_id',position_id ='$pos_id',quantity='$qty',date_recruit='$date',expired_recruit='$expire' where id='$edit_id'";
+            $update_ship = "update recruit_manage set position_id ='$pos_id',quantity='$qty',date_recruit='$date',expired_recruit='$expire' where id='$edit_id'";
             $run_ship = mysqli_query($conn, $update_ship);
             if ($run_ship) {
                 echo "<script>alert('Cập nhật thành công')</script>";

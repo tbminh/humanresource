@@ -70,31 +70,34 @@ if (!isset($_SESSION['admin_email'])) {
                 <table id="example1" class="table table-bordered">
                   <thead>
                     <th>STT</th>
+                    <th>Mã Nhân Viên</th>
                     <th>Tên Nhân Viên</th>
                     <th>Tên KPI</th>
                     <th>Tháng giao</th>
                     <th>Tỉ trọng</th>
                     <th>Đơn vị tính</th>
                     <th>Đánh giá </th>
-                    <th scope="col" colspan="2">Tùy chọn</th>
+                    <th scope="col" colspan="3">Tùy chọn</th>
                   </thead>
                   <tbody>
                     <?php
                     $i = 0;
                     //Thực hiện truy vấn SQL show ra toàn bộ kpi
-                    $query = "SELECT * from kpi";
+                    $query = "SELECT k.*,u.full_name 
+                              from kpi as k, users as u
+                              where k.employ_id = u.id
+                              order by k.id desc";
                     $result = mysqli_query($conn, $query);
                     while ($row = mysqli_fetch_array($result)) {
                       //Gán các giá trị lấy được tự lệnh SQL vào các biến
                       $id = $row['id'];
                       // $id_kpi = $row['id_kpi'];
                       $emp_id = $row['employ_id'];
+                      $name = $row['full_name'];
                       $kpi_name = $row['kpi_name'];
-                      $name = $row['employ_name'];
                       $percent = $row['percent'];
                       $time = $row['time'];
                       $unit = $row['unit'];
-                      $target = $row['target'];
                       $status = $row['status_kpi'];
                       $i++;
                       $date = strtotime($time);
@@ -103,6 +106,7 @@ if (!isset($_SESSION['admin_email'])) {
                         <!-- Show các biến ra ngoài -->
                         <td> <?php echo $i; ?> </td>
                         <td> <?php echo $emp_id; ?> </td>
+                        <td> <?php echo $name; ?> </td>
                         <td> <?php echo $kpi_name ?> </td>
                         <td> <?php echo date('m', $date) ?> </td>
                         <td> <?php echo $percent; ?> </td>
@@ -164,22 +168,13 @@ if (!isset($_SESSION['admin_email'])) {
                     $run_emp = mysqli_query($conn, $get_emp);
                     while ($row_emp = mysqli_fetch_array($run_emp)) {
                       $emp_id = $row_emp['id'];
-                      $employ_id = $row_emp['employee_id'];
                       $emp_name = $row_emp['full_name'];
-                      echo "<option>  $emp_id - $emp_name</option>";
+                      echo "<option value='$emp_id'>$emp_id - $emp_name</option>";
                     }
                     ?>
                   </select>
                 </div>
               </div>
-
-              <div class="form-group">
-                <label for="position-id" class="col-sm-3 control-label" required>Mã KPI </label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" name="id_kpi">
-                </div>
-              </div>
-
               <div class="form-group">
                 <label for="kpi-id" class="col-sm-3 control-label" required>Tên KPI</label>
                 <div class="col-sm-9">
@@ -222,16 +217,13 @@ if (!isset($_SESSION['admin_email'])) {
   if (isset($_POST['add'])) {
     // Gán giá trị đã nhập vào các biến
     $emp_id = $_POST['employ_id'];
-    $emp_name = $_POST['full_name'];
-    $id_kpi = $_POST['id_kpi'];
     $kpi_name = $_POST['kpi_name'];
     $unit = $_POST['unit'];
     $percent = $_POST['percent'];
-    $target = 0;
     $time = $_POST['time'];
 
-    //Thực hiện thêm dữ liệu từ các biến 
-    $insert_p = "insert into kpi (id_kpi,kpi_name,employ_id,full_name,unit,percent,target,time ) VALUES ('$id_kpi','$kpi_name','$emp_id','$emp_name','$unit','$percent','$target','$time')";
+    //Thực hiện thêm dữ liệu từ các biến
+    $insert_p = "insert into kpi(employ_id,kpi_name,unit,percent,time) VALUES ('$emp_id','$kpi_name','$unit','$percent','$time')";
     $run_p = mysqli_query($conn, $insert_p);
     //Báo lỗi khi nhập trùng mã nhân viên và email
     if ($run_p) {

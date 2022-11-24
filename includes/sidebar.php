@@ -122,7 +122,7 @@ if (!isset($_SESSION['admin_email'])) {
                         </a>
                     </li>
                     <li>
-                        <a href="logout.php">
+                        <a href="logout.php" onclick="return confirm('Xác nhận đăng xuất?')">
                             <i class="fa fa-fw fa-power-off"></i> Đăng xuất
                         </a>
                     </li>

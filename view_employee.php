@@ -131,14 +131,12 @@ if (!isset($_SESSION['admin_email'])) {
                 </div>
                 <div class="modal-body">
                     <form action="" method="POST" class="form-horizontal">
-
                         <div class="form-group">
                             <label for="expert-id" class="col-sm-3 control-label" require>Tên Nhân Viên</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="name">
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="employee" class="col-sm-3 control-label">Trình Độ</label>
                             <div class="col-md-6">
@@ -156,7 +154,6 @@ if (!isset($_SESSION['admin_email'])) {
                                 </select>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="employee" class="col-sm-3 control-label">Chức Vụ</label>
                             <div class="col-md-6">
@@ -262,12 +259,7 @@ if (isset($_POST['add'])) {
     $run_soluong = mysqli_query($conn, $get_soluong);
     while ($row_soluong = mysqli_fetch_array($run_soluong)) {
         $soluong = $row_soluong['email'];
-        $idd = $row_soluong['employee_id'];
         //Báo lỗi khi nhập trùng mã nhân viên hoặc email
-        if ($idd ==  $id) {
-            echo "<script>alert('Mã nhân viên đã tồn tại')</script>";
-            exit();
-        }
         if ($soluong ==  $email) {
             echo "<script>alert('Email đã tồn tại')</script>";
             exit();
@@ -286,7 +278,7 @@ if (isset($_POST['add'])) {
                                     phone,
                                     sex,
                                     birthday)
-                    VALUES ( '$id','$role','$name','$level_id','$pos_id','$sc_id', '$email','$pass','$address','$phone','$sex','$birthday')";
+                    VALUES ('$role','$name','$level_id','$pos_id','$sc_id', '$email','$pass','$address','$phone','$sex','$birthday')";
     $run_emp = mysqli_query($conn, $insert_emp);
     if ($run_emp) {
         echo "<script>alert('Bạn đã thêm nhân viên thành công')</script>";

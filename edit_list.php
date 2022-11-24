@@ -23,8 +23,7 @@ if (!isset($_SESSION['admin_email'])) {
         $date = $row_edit_ship['apply_date'];
         $status = $row_edit_ship['apply_status'];
         //Lấy tên chức vụ
-        // $get_emps = "select * from position where id ='$pos_id'";
-        $get_emps = "SELECT ps.position_name, rec.position_id, rec.recruit_id, list.recruitment_id
+        $get_emps = "SELECT ps.position_name, rec.position_id, list.recruitment_id
                     FROM position as ps, recruit_manage as rec, recruit_list as list
                     WHERE ps.id = rec.position_id
                     AND rec.id = list.recruitment_id
@@ -33,7 +32,6 @@ if (!isset($_SESSION['admin_email'])) {
         $rows = mysqli_fetch_array($run_emps);
         $poss = $rows['position_name'];
         $p_id = $rows['position_id'];
-        $rc_id = $rows['recruit_id'];
         $id = $rows['recruitment_id'];
     }
     ?>
@@ -63,17 +61,16 @@ if (!isset($_SESSION['admin_email'])) {
                                 <label for="employee" class="col-sm-3 control-label">Chức Vụ</label>
                                 <div class="col-md-6">
                                     <select name="rec" class="form-control">
-                                        <option value="<?php echo $id; ?>"> <?php echo "$rc_id - $poss;"  ?> </option>
+                                        <option value="<?php echo $id; ?>"> <?php echo "$rc_id - $poss";  ?> </option>
                                         <option value="">---------- Chọn mã tuyển dụng ----------</option>
                                         <?php
-                                        $get_p = "SELECT ps.position_name, rec.position_id, rec.recruit_id, list.recruitment_id
+                                        $get_p = "SELECT ps.position_name, rec.position_id, list.recruitment_id
                                                     FROM position as ps, recruit_manage as rec, recruit_list as list
                                                     WHERE ps.id = rec.position_id
                                                     AND rec.id = list.recruitment_id";
                                         $run_p = mysqli_query($conn, $get_p);
                                         while ($row_p = mysqli_fetch_array($run_p)) {
                                             $id = $row_p['recruitment_id'];
-                                            $rc_id = $row_p['recruit_id'];
                                             $p_name = $row_p['position_name'];
                                             echo "<option value ='$id' >$rc_id - $p_name</option>";
                                         }
@@ -173,6 +170,7 @@ if (!isset($_SESSION['admin_email'])) {
             $sex = $_POST['sex'];
             $date = $_POST['date'];
             $status = $_POST['status'];
+
             echo "$rc_id - $name - $phone - $birthday - $email - $sex - $date - $status";
 
             $update_ship = "update recruit_list set

@@ -187,21 +187,21 @@ if (!isset($_SESSION['admin_email'])) {
                         <div class="form-group">
                             <label for="admin_id" class="col-sm-3 control-label" require>Mật Khẩu Cũ</label>
                             <div class="col-sm-7">
-                                <input type="password" class="form-control" placeholder="Nhập mật khẩu cũ...." name="old">
+                                <input type="password" class="form-control" placeholder="Nhập mật khẩu cũ...." name="old" required="required">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="admin_id-id" class="col-sm-3 control-label" require>Mật Khẩu Mới</label>
                             <div class="col-sm-7">
-                                <input type="password" class="form-control" placeholder="Nhập mật khẩu mới...." name="new">
+                                <input type="password" class="form-control" placeholder="Nhập mật khẩu mới...." name="new" required="required">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="admin_id-id" class="col-sm-3 control-label" require> Xác Nhận Mật Khẩu</label>
                             <div class="col-sm-7">
-                                <input type="password" class="form-control" placeholder="Xác nhận mật khẩu...." name="confirm">
+                                <input type="password" class="form-control" placeholder="Xác nhận mật khẩu...." name="confirm" required="required">
                             </div>
                         </div>
 
@@ -243,9 +243,7 @@ if (isset($_POST['update_p'])) {
     $new_md5 = md5($new);
     $confirm = $_POST['confirm'];
 
-    if ($old == "" || $new == "" || $confirm == "") {
-        echo "<script>alert('Hãy Điền đầy đủ thông tin!')</script>";
-    } else if ($old_md5 != $admin_pass) {
+    if ($old_md5 != $admin_pass) {
         echo "<script>alert('Mật khẩu cũ nhập không chính xác, đảm bảo đã tắt caps lock!')</script>";
     } else if (strlen($new) < 6) {
         echo "<script>alert('Mật khẩu quá ngắn, hãy thử với mật khẩu khác an toàn hơn!')</script>";
@@ -255,8 +253,8 @@ if (isset($_POST['update_p'])) {
         $update_pass = "update users set pass='$new_md5' where id='$admin_id'";
         $run_pass = mysqli_query($conn, $update_pass);
         if ($run_pass) {
-            echo "<script>alert('Đổi mật khẩu thành công!')</script>";
-            echo "<script>window.open('index.php?profile_admin','_self')</script>";
+            echo "<script>alert('Đổi mật khẩu thành công! Vui lòng đăng nhập lại')</script>";
+            echo "<script>window.open('logout.php','_self')</script>";
         }
     }
 }

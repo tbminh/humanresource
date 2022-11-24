@@ -52,7 +52,6 @@ if (!isset($_SESSION['admin_email'])) {
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Mã tuyển dụng</th>
                                 <th>Chức Vụ </th>
                                 <th>Số lượng </th>
                                 <th>Ngày tuyển</th>
@@ -73,7 +72,6 @@ if (!isset($_SESSION['admin_email'])) {
                             //Gán những thông tin lấy được vào các biến
                             while ($row_c = mysqli_fetch_array($run_c)) {
                                 $id = $row_c['id'];
-                                $c_id = $row_c['recruit_id'];
                                 $p_name = $row_c['position_name'];
                                 $qty = $row_c['quantity'];
                                 $date = $row_c['date_recruit'];
@@ -84,7 +82,6 @@ if (!isset($_SESSION['admin_email'])) {
                                 <tr>
                                     <!-- Show các biến ra ngoài -->
                                     <td> <?php echo $i; ?> </td>
-                                    <td> <?php echo $c_id; ?> </td>
                                     <td> <?php echo $p_name; ?> </td>
                                     <td> <?php echo $qty; ?> </td>
                                     <td> <?php echo $date; ?></td>
@@ -107,7 +104,7 @@ if (!isset($_SESSION['admin_email'])) {
                                             </a>
                                         <?php elseif ($status == $ab) : ?>
                                             <a href="index.php?done_qltd=<?php echo $id; ?>" class="btn btn-primary">
-                                                <i class="fa fa-check" aria-hidden="true"></i> Duyệt
+                                                <i class="fa fa-check" aria-hidden="true"></i> Duyệt đủ
                                             </a>
                                         <?php endif; ?>
                                     </td>
