@@ -225,7 +225,6 @@ if (!isset($_SESSION['admin_email'])) {
     //Thực hiện thêm dữ liệu từ các biến
     $insert_p = "insert into kpi(employ_id,kpi_name,unit,percent,time) VALUES ('$emp_id','$kpi_name','$unit','$percent','$time')";
     $run_p = mysqli_query($conn, $insert_p);
-    //Báo lỗi khi nhập trùng mã nhân viên và email
     if ($run_p) {
       echo "<script>alert('Bạn đã thêm kpi thành công')</script>";
       echo "<script>window.open('index.php?view_kpi','_self')</script>";

@@ -17,8 +17,8 @@ if (!isset($_SESSION['admin_email'])) {
     </section>
     <div class="box-header with-border"></div>
     <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Thêm mới</a>
-    <br />
-    <div class="row">
+    
+    <div class="row"><br>
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="table-responsive">

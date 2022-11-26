@@ -1,10 +1,9 @@
+<?php include 'includes/header.php'; ?>
 <?php
 
 if (!isset($_SESSION['admin_email'])) {
-
     echo "<script>window.open('login.php','_self')</script>";
 } else {
-
 ?>
     <section class="content-header">
         <h1 style="color:blue;">
@@ -81,7 +80,7 @@ if (!isset($_SESSION['admin_email'])) {
                     <h4 class="modal-title"><b>Thêm chức vụ</b></h4>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" class="form-horizontal">
+                    <form action="" method="POST" class="form-horizontal">
                         <div class="form-group">
                             <label for="employee" class="col-sm-3 control-label" required="required"> Phòng Ban </label>
                             <div class="col-md-6">
@@ -89,20 +88,19 @@ if (!isset($_SESSION['admin_email'])) {
                                     <option value="">--------- Phòng ban Nhân Viên ---------</option>
                                     <?php
                                     //Truy vấn SQL hiển thị ra thông tin phòng ban
-                                    $get_l = "SELECT * FROM department";
-                                    $run_l = mysqli_query($conn,$get_l);
+                                    $get_l = "select * FROM department";
+                                    $run_l = mysqli_query($conn, $get_l);
                                     while ($row_l = mysqli_fetch_array($run_l)) {
                                         $d_id = $row_l['id'];
-                                        $l_id = $row_l['department_id'];
-                                        $l_name = $row_l['depart_name'];
-                                        echo "<option value='$d_id'>$l_id - $l_name</option>";
+                                        $d_name = $row_l['depart_name'];
+                                        echo "<option value='$d_id'>$d_name</option>";
                                     }
                                     ?>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="position-id" class="col-sm-3 control-label" required="required"> Tên Chức Vụ</label>
+                            <label for="position-id" class="col-sm-3 control-label" required="required">Tên Chức Vụ</label>
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" name="name">
                             </div>
@@ -110,7 +108,7 @@ if (!isset($_SESSION['admin_email'])) {
                         <div class="form-group">
                             <label for="position-id" class="col-sm-3 control-label" require>Lương chức vụ</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" name="coef">
+                                <input type="number" class="form-control" name="coef">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -128,22 +126,18 @@ if (!isset($_SESSION['admin_email'])) {
 //Nhận sự kiện 'add' từ nút thêm của modal
 if (isset($_POST['add'])) {
     // Gán giá trị đã nhập vào các biến
-    $name = $_POST['name'];
     $d_id = $_POST['depart'];
+    $name = $_POST['name'];
     $coef = $_POST['coef'];
-
     //Thực hiện lưu dữ liệu
-    $insert_p = "insert into position(
-                            position_name,
-                            depart_id,
-                            basic_salary) 
-                VALUES ('$name','$d_id','$coef')";
+    $insert_p = "insert into position(depart_id,position_name,basic_salary) 
+                 VALUES ('$d_id','$name','$coef')";
     $run_p = mysqli_query($conn, $insert_p);
     if ($run_p) {
         echo "<script>alert('Bạn đã thêm chức vụ thành công')</script>";
         echo "<script>window.open('index.php?view_position','_self')</script>";
     } else {
-        echo "<script>alert('Bạn đã thêm không thành công')</script>";
+        printf("error: %s\n", mysqli_error($conn));
     }
 }
 ?>
